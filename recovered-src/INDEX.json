@@ -1,0 +1,500 @@
+[
+  {
+    "bundle": "main",
+    "originalMarker": "src/shared/ipc-channels.ts",
+    "file": "recovered-src/main/src/shared/ipc-channels.generated.js",
+    "bundleLines": "44-72"
+  },
+  {
+    "bundle": "main",
+    "originalMarker": "src/shared/cooling.ts",
+    "file": "recovered-src/main/src/shared/cooling.generated.js",
+    "bundleLines": "75-177"
+  },
+  {
+    "bundle": "main",
+    "originalMarker": "src/shared/nvme.ts",
+    "file": "recovered-src/main/src/shared/nvme.generated.js",
+    "bundleLines": "180-192"
+  },
+  {
+    "bundle": "main",
+    "originalMarker": "src/main/alerts.ts",
+    "file": "recovered-src/main/src/main/alerts.generated.js",
+    "bundleLines": "195-381"
+  },
+  {
+    "bundle": "main",
+    "originalMarker": "src/main/collectors/cpuInfo.ts",
+    "file": "recovered-src/main/src/main/collectors/cpuInfo.generated.js",
+    "bundleLines": "384-427"
+  },
+  {
+    "bundle": "main",
+    "originalMarker": "src/main/collectors/disk.ts",
+    "file": "recovered-src/main/src/main/collectors/disk.generated.js",
+    "bundleLines": "430-438"
+  },
+  {
+    "bundle": "main",
+    "originalMarker": "src/main/collectors/gpuSmi.ts",
+    "file": "recovered-src/main/src/main/collectors/gpuSmi.generated.js",
+    "bundleLines": "441-649"
+  },
+  {
+    "bundle": "main",
+    "originalMarker": "src/main/collectors/exec.ts",
+    "file": "recovered-src/main/src/main/collectors/exec.generated.js",
+    "bundleLines": "652-688"
+  },
+  {
+    "bundle": "main",
+    "originalMarker": "src/main/collectors/gpuInfo.ts",
+    "file": "recovered-src/main/src/main/collectors/gpuInfo.generated.js",
+    "bundleLines": "691-847"
+  },
+  {
+    "bundle": "main",
+    "originalMarker": "src/main/collectors/hardware.ts",
+    "file": "recovered-src/main/src/main/collectors/hardware.generated.js",
+    "bundleLines": "850-1066"
+  },
+  {
+    "bundle": "main",
+    "originalMarker": "src/main/collectors/lhm.ts",
+    "file": "recovered-src/main/src/main/collectors/lhm.generated.js",
+    "bundleLines": "1069-1215"
+  },
+  {
+    "bundle": "main",
+    "originalMarker": "src/main/cooling/controller.ts",
+    "file": "recovered-src/main/src/main/cooling/controller.generated.js",
+    "bundleLines": "1218-1437"
+  },
+  {
+    "bundle": "main",
+    "originalMarker": "src/main/frametime/stats.ts",
+    "file": "recovered-src/main/src/main/frametime/stats.generated.js",
+    "bundleLines": "1440-1548"
+  },
+  {
+    "bundle": "main",
+    "originalMarker": "src/main/frametime/monitor.ts",
+    "file": "recovered-src/main/src/main/frametime/monitor.generated.js",
+    "bundleLines": "1551-1731"
+  },
+  {
+    "bundle": "main",
+    "originalMarker": "src/main/cooling/model.ts",
+    "file": "recovered-src/main/src/main/cooling/model.generated.js",
+    "bundleLines": "1734-1832"
+  },
+  {
+    "bundle": "main",
+    "originalMarker": "src/main/collectors/storage.ts",
+    "file": "recovered-src/main/src/main/collectors/storage.generated.js",
+    "bundleLines": "1835-2001"
+  },
+  {
+    "bundle": "main",
+    "originalMarker": "src/main/collectors/publicIp.ts",
+    "file": "recovered-src/main/src/main/collectors/publicIp.generated.js",
+    "bundleLines": "2004-2063"
+  },
+  {
+    "bundle": "main",
+    "originalMarker": "src/main/collectors/network.ts",
+    "file": "recovered-src/main/src/main/collectors/network.generated.js",
+    "bundleLines": "2066-2220"
+  },
+  {
+    "bundle": "main",
+    "originalMarker": "src/main/collectors/pdh.ts",
+    "file": "recovered-src/main/src/main/collectors/pdh.generated.js",
+    "bundleLines": "2223-2304"
+  },
+  {
+    "bundle": "main",
+    "originalMarker": "src/main/collectors/power.ts",
+    "file": "recovered-src/main/src/main/collectors/power.generated.js",
+    "bundleLines": "2307-2323"
+  },
+  {
+    "bundle": "main",
+    "originalMarker": "src/main/collectors/clash.ts",
+    "file": "recovered-src/main/src/main/collectors/clash.generated.js",
+    "bundleLines": "2326-2505"
+  },
+  {
+    "bundle": "main",
+    "originalMarker": "src/main/collectors/processes.ts",
+    "file": "recovered-src/main/src/main/collectors/processes.generated.js",
+    "bundleLines": "2508-2592"
+  },
+  {
+    "bundle": "main",
+    "originalMarker": "src/main/collectors/proxy.ts",
+    "file": "recovered-src/main/src/main/collectors/proxy.generated.js",
+    "bundleLines": "2595-2855"
+  },
+  {
+    "bundle": "main",
+    "originalMarker": "src/main/collectors/quality.ts",
+    "file": "recovered-src/main/src/main/collectors/quality.generated.js",
+    "bundleLines": "2858-2926"
+  },
+  {
+    "bundle": "main",
+    "originalMarker": "src/main/collectors/tunnels.ts",
+    "file": "recovered-src/main/src/main/collectors/tunnels.generated.js",
+    "bundleLines": "2929-2942"
+  },
+  {
+    "bundle": "main",
+    "originalMarker": "src/main/collectors/scheduler.ts",
+    "file": "recovered-src/main/src/main/collectors/scheduler.generated.js",
+    "bundleLines": "2945-3311"
+  },
+  {
+    "bundle": "main",
+    "originalMarker": "src/main/history/metrics.ts",
+    "file": "recovered-src/main/src/main/history/metrics.generated.js",
+    "bundleLines": "3314-3417"
+  },
+  {
+    "bundle": "main",
+    "originalMarker": "src/main/history/store.ts",
+    "file": "recovered-src/main/src/main/history/store.generated.js",
+    "bundleLines": "3420-3861"
+  },
+  {
+    "bundle": "main",
+    "originalMarker": "src/main/diagnosis/rules.ts",
+    "file": "recovered-src/main/src/main/diagnosis/rules.generated.js",
+    "bundleLines": "3864-4366"
+  },
+  {
+    "bundle": "main",
+    "originalMarker": "src/main/diagnosis/engine.ts",
+    "file": "recovered-src/main/src/main/diagnosis/engine.generated.js",
+    "bundleLines": "4369-4482"
+  },
+  {
+    "bundle": "main",
+    "originalMarker": "src/main/icon.ts",
+    "file": "recovered-src/main/src/main/icon.generated.js",
+    "bundleLines": "4485-4488"
+  },
+  {
+    "bundle": "main",
+    "originalMarker": "src/main/collectors/speedtest.ts",
+    "file": "recovered-src/main/src/main/collectors/speedtest.generated.js",
+    "bundleLines": "4491-4839"
+  },
+  {
+    "bundle": "main",
+    "originalMarker": "src/main/cooling/identify.ts",
+    "file": "recovered-src/main/src/main/cooling/identify.generated.js",
+    "bundleLines": "4842-4889"
+  },
+  {
+    "bundle": "main",
+    "originalMarker": "src/main/ipc.ts",
+    "file": "recovered-src/main/src/main/ipc.generated.js",
+    "bundleLines": "4892-4975"
+  },
+  {
+    "bundle": "main",
+    "originalMarker": "src/main/settings.ts",
+    "file": "recovered-src/main/src/main/settings.generated.js",
+    "bundleLines": "4978-5287"
+  },
+  {
+    "bundle": "main",
+    "originalMarker": "src/main/tray.ts",
+    "file": "recovered-src/main/src/main/tray.generated.js",
+    "bundleLines": "5290-5345"
+  },
+  {
+    "bundle": "main",
+    "originalMarker": "src/main/windows/mainWindow.ts",
+    "file": "recovered-src/main/src/main/windows/mainWindow.generated.js",
+    "bundleLines": "5348-5405"
+  },
+  {
+    "bundle": "main",
+    "originalMarker": "src/shared/taskbar.ts",
+    "file": "recovered-src/main/src/shared/taskbar.generated.js",
+    "bundleLines": "5408-5417"
+  },
+  {
+    "bundle": "main",
+    "originalMarker": "src/main/windows/taskbarWindow.ts",
+    "file": "recovered-src/main/src/main/windows/taskbarWindow.generated.js",
+    "bundleLines": "5420-5529"
+  },
+  {
+    "bundle": "main",
+    "originalMarker": "src/main/index.ts",
+    "file": "recovered-src/main/src/main/index.generated.js",
+    "bundleLines": "5532-5691"
+  },
+  {
+    "bundle": "preload",
+    "originalMarker": "src/shared/ipc-channels.ts",
+    "file": "recovered-src/preload/src/shared/ipc-channels.generated.js",
+    "bundleLines": "3-31"
+  },
+  {
+    "bundle": "preload",
+    "originalMarker": "src/preload/index.ts",
+    "file": "recovered-src/preload/src/preload/index.generated.js",
+    "bundleLines": "34-77"
+  },
+  {
+    "bundle": "renderer",
+    "originalMarker": "src/renderer/lib/layout.ts",
+    "file": "recovered-src/renderer/src/renderer/lib/layout.generated.js",
+    "bundleLines": "17488-17623"
+  },
+  {
+    "bundle": "renderer",
+    "originalMarker": "src/renderer/components/Dashboard.tsx",
+    "file": "recovered-src/renderer/src/renderer/components/Dashboard.generated.js",
+    "bundleLines": "17626-17686"
+  },
+  {
+    "bundle": "renderer",
+    "originalMarker": "src/renderer/lib/format.ts",
+    "file": "recovered-src/renderer/src/renderer/lib/format.generated.js",
+    "bundleLines": "17689-17734"
+  },
+  {
+    "bundle": "renderer",
+    "originalMarker": "src/renderer/lib/status.ts",
+    "file": "recovered-src/renderer/src/renderer/lib/status.generated.js",
+    "bundleLines": "17737-17748"
+  },
+  {
+    "bundle": "renderer",
+    "originalMarker": "src/renderer/components/GlassCard.tsx",
+    "file": "recovered-src/renderer/src/renderer/components/GlassCard.generated.js",
+    "bundleLines": "17751-17768"
+  },
+  {
+    "bundle": "renderer",
+    "originalMarker": "src/renderer/components/DiskPanel.tsx",
+    "file": "recovered-src/renderer/src/renderer/components/DiskPanel.generated.js",
+    "bundleLines": "17771-17831"
+  },
+  {
+    "bundle": "renderer",
+    "originalMarker": "src/shared/cooling.ts",
+    "file": "recovered-src/renderer/src/shared/cooling.generated.js",
+    "bundleLines": "17834-17930"
+  },
+  {
+    "bundle": "renderer",
+    "originalMarker": "src/renderer/components/CoolingCard.tsx",
+    "file": "recovered-src/renderer/src/renderer/components/CoolingCard.generated.js",
+    "bundleLines": "17933-17997"
+  },
+  {
+    "bundle": "renderer",
+    "originalMarker": "src/renderer/lib/diag.ts",
+    "file": "recovered-src/renderer/src/renderer/lib/diag.generated.js",
+    "bundleLines": "18000-18061"
+  },
+  {
+    "bundle": "renderer",
+    "originalMarker": "src/renderer/lib/historyFormat.ts",
+    "file": "recovered-src/renderer/src/renderer/lib/historyFormat.generated.js",
+    "bundleLines": "18064-18158"
+  },
+  {
+    "bundle": "renderer",
+    "originalMarker": "src/renderer/components/DiagCard.tsx",
+    "file": "recovered-src/renderer/src/renderer/components/DiagCard.generated.js",
+    "bundleLines": "18161-18251"
+  },
+  {
+    "bundle": "renderer",
+    "originalMarker": "src/renderer/components/DiagSheet.tsx",
+    "file": "recovered-src/renderer/src/renderer/components/DiagSheet.generated.js",
+    "bundleLines": "18254-18477"
+  },
+  {
+    "bundle": "renderer",
+    "originalMarker": "src/renderer/components/controls.tsx",
+    "file": "recovered-src/renderer/src/renderer/components/controls.generated.js",
+    "bundleLines": "18480-18526"
+  },
+  {
+    "bundle": "renderer",
+    "originalMarker": "src/renderer/components/CoolingSheet.tsx",
+    "file": "recovered-src/renderer/src/renderer/components/CoolingSheet.generated.js",
+    "bundleLines": "18529-18989"
+  },
+  {
+    "bundle": "renderer",
+    "originalMarker": "src/renderer/lib/hwText.ts",
+    "file": "recovered-src/renderer/src/renderer/lib/hwText.generated.js",
+    "bundleLines": "18992-19015"
+  },
+  {
+    "bundle": "renderer",
+    "originalMarker": "src/renderer/components/HardwareCard.tsx",
+    "file": "recovered-src/renderer/src/renderer/components/HardwareCard.generated.js",
+    "bundleLines": "19018-19108"
+  },
+  {
+    "bundle": "renderer",
+    "originalMarker": "src/shared/nvme.ts",
+    "file": "recovered-src/renderer/src/shared/nvme.generated.js",
+    "bundleLines": "19111-19123"
+  },
+  {
+    "bundle": "renderer",
+    "originalMarker": "src/renderer/components/HardwareSheet.tsx",
+    "file": "recovered-src/renderer/src/renderer/components/HardwareSheet.generated.js",
+    "bundleLines": "19126-19501"
+  },
+  {
+    "bundle": "renderer",
+    "originalMarker": "src/renderer/components/HistoryChart.tsx",
+    "file": "recovered-src/renderer/src/renderer/components/HistoryChart.generated.js",
+    "bundleLines": "23301-23537"
+  },
+  {
+    "bundle": "renderer",
+    "originalMarker": "src/renderer/components/HistorySheet.tsx",
+    "file": "recovered-src/renderer/src/renderer/components/HistorySheet.generated.js",
+    "bundleLines": "23540-24055"
+  },
+  {
+    "bundle": "renderer",
+    "originalMarker": "src/renderer/components/AnimatedNumber.tsx",
+    "file": "recovered-src/renderer/src/renderer/components/AnimatedNumber.generated.js",
+    "bundleLines": "24058-24098"
+  },
+  {
+    "bundle": "renderer",
+    "originalMarker": "src/renderer/components/Sparkline.tsx",
+    "file": "recovered-src/renderer/src/renderer/components/Sparkline.generated.js",
+    "bundleLines": "24101-24172"
+  },
+  {
+    "bundle": "renderer",
+    "originalMarker": "src/renderer/components/StatusBadge.tsx",
+    "file": "recovered-src/renderer/src/renderer/components/StatusBadge.generated.js",
+    "bundleLines": "24175-24181"
+  },
+  {
+    "bundle": "renderer",
+    "originalMarker": "src/renderer/components/MetricCard.tsx",
+    "file": "recovered-src/renderer/src/renderer/components/MetricCard.generated.js",
+    "bundleLines": "24184-24218"
+  },
+  {
+    "bundle": "renderer",
+    "originalMarker": "src/renderer/components/NetworkCard.tsx",
+    "file": "recovered-src/renderer/src/renderer/components/NetworkCard.generated.js",
+    "bundleLines": "24221-24418"
+  },
+  {
+    "bundle": "renderer",
+    "originalMarker": "src/renderer/hooks/usePowerLive.ts",
+    "file": "recovered-src/renderer/src/renderer/hooks/usePowerLive.generated.js",
+    "bundleLines": "24421-24447"
+  },
+  {
+    "bundle": "renderer",
+    "originalMarker": "src/renderer/components/PowerCard.tsx",
+    "file": "recovered-src/renderer/src/renderer/components/PowerCard.generated.js",
+    "bundleLines": "24450-24466"
+  },
+  {
+    "bundle": "renderer",
+    "originalMarker": "src/renderer/components/ProcessCard.tsx",
+    "file": "recovered-src/renderer/src/renderer/components/ProcessCard.generated.js",
+    "bundleLines": "24469-24587"
+  },
+  {
+    "bundle": "renderer",
+    "originalMarker": "src/renderer/components/ProxyCard.tsx",
+    "file": "recovered-src/renderer/src/renderer/components/ProxyCard.generated.js",
+    "bundleLines": "24590-24810"
+  },
+  {
+    "bundle": "renderer",
+    "originalMarker": "src/renderer/components/QualityCard.tsx",
+    "file": "recovered-src/renderer/src/renderer/components/QualityCard.generated.js",
+    "bundleLines": "24813-24890"
+  },
+  {
+    "bundle": "renderer",
+    "originalMarker": "src/renderer/components/SettingsSheet.tsx",
+    "file": "recovered-src/renderer/src/renderer/components/SettingsSheet.generated.js",
+    "bundleLines": "24893-25414"
+  },
+  {
+    "bundle": "renderer",
+    "originalMarker": "src/renderer/components/SpeedTestCard.tsx",
+    "file": "recovered-src/renderer/src/renderer/components/SpeedTestCard.generated.js",
+    "bundleLines": "25417-25672"
+  },
+  {
+    "bundle": "renderer",
+    "originalMarker": "src/renderer/components/AppLogo.tsx",
+    "file": "recovered-src/renderer/src/renderer/components/AppLogo.generated.js",
+    "bundleLines": "25675-25796"
+  },
+  {
+    "bundle": "renderer",
+    "originalMarker": "src/renderer/components/TitleBar.tsx",
+    "file": "recovered-src/renderer/src/renderer/components/TitleBar.generated.js",
+    "bundleLines": "25799-25915"
+  },
+  {
+    "bundle": "renderer",
+    "originalMarker": "src/renderer/hooks/useMetrics.ts",
+    "file": "recovered-src/renderer/src/renderer/hooks/useMetrics.generated.js",
+    "bundleLines": "25918-25941"
+  },
+  {
+    "bundle": "renderer",
+    "originalMarker": "src/renderer/hooks/useSettings.ts",
+    "file": "recovered-src/renderer/src/renderer/hooks/useSettings.generated.js",
+    "bundleLines": "25944-25956"
+  },
+  {
+    "bundle": "renderer",
+    "originalMarker": "src/renderer/hooks/useTheme.ts",
+    "file": "recovered-src/renderer/src/renderer/hooks/useTheme.generated.js",
+    "bundleLines": "25959-25992"
+  },
+  {
+    "bundle": "renderer",
+    "originalMarker": "src/renderer/App.tsx",
+    "file": "recovered-src/renderer/src/renderer/App.generated.js",
+    "bundleLines": "25995-26170"
+  },
+  {
+    "bundle": "renderer",
+    "originalMarker": "src/shared/taskbar.ts",
+    "file": "recovered-src/renderer/src/shared/taskbar.generated.js",
+    "bundleLines": "26173-26182"
+  },
+  {
+    "bundle": "renderer",
+    "originalMarker": "src/renderer/components/TaskbarApp.tsx",
+    "file": "recovered-src/renderer/src/renderer/components/TaskbarApp.generated.js",
+    "bundleLines": "26185-26278"
+  },
+  {
+    "bundle": "renderer",
+    "originalMarker": "src/renderer/main.tsx",
+    "file": "recovered-src/renderer/src/renderer/main.generated.js",
+    "bundleLines": "26281-26285"
+  }
+]

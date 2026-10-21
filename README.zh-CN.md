@@ -16,6 +16,8 @@ SysMonitor 是 Windows 桌面系统监控程序，提供任务栏悬浮显示、
 
 目前程序界面为中文；英文 README 是英文使用说明，不表示界面已有英文翻译。
 
+**详细文档：**[功能与使用指南](docs/FEATURES.zh-CN.md) · [权限、数据与隐私说明](docs/PERMISSIONS_AND_PRIVACY.zh-CN.md) · [生成代码片段说明](recovered-src/README.md)。文档区分界面观察与代码审阅，并列明自动联网行为。
+
 ## 系统要求与运行方法
 
 - 64 位 Windows 10/11
@@ -62,6 +64,8 @@ Add-LocalGroupMember -SID S-1-5-32-559 -Member "$env:USERDOMAIN\$env:USERNAME"
 | `out/main/`、`out/preload/`、`out/renderer/` | 从 Electron 包中提取的应用构建代码 |
 | `resources/` | PowerShell 硬件及网络脚本、图标 |
 | `vendor/PresentMon/` | Intel PresentMon 程序和许可证 |
+| `recovered-src/` | 按原模块标记拆分的生成 JavaScript；不是独立可编译的原始 TypeScript 源码 |
+| `docs/` | 中英文详细功能与权限/隐私文档 |
 
 原始目录旁的“将总内存显示改成固定 64 GB”补丁脚本没有收入仓库，因为它会使监控结果失真。仓库中的应用代码读取实际总内存。
 

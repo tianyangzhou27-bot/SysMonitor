@@ -16,6 +16,8 @@ SysMonitor is a Windows desktop system monitor with a compact taskbar overlay, t
 
 The current application interface is in **Chinese**. These English instructions explain how to run it; they do not translate the interface.
 
+**Detailed documentation:** [Features and user guide](docs/FEATURES.md) · [Permissions, data and privacy](docs/PERMISSIONS_AND_PRIVACY.md) · [Generated source fragments](recovered-src/README.md). These documents distinguish observed UI behavior from code review and describe the automatic network connections.
+
 ## Requirements and run
 
 - Windows 10/11, 64-bit
@@ -62,6 +64,8 @@ The app contacts external endpoints for public IP/connectivity checks and only r
 | `out/main/`, `out/preload/`, `out/renderer/` | Extracted Electron application build |
 | `resources/` | PowerShell hardware/network helpers and icon |
 | `vendor/PresentMon/` | Intel PresentMon binary and its license |
+| `recovered-src/` | Generated JavaScript split by the bundle's original module markers; not independent or original TypeScript source |
+| `docs/` | Detailed feature and permissions/privacy guides in English and Chinese |
 
 The memory spoofing script found beside the supplied application was excluded: it changes the displayed total memory to a fixed 64 GB and does not belong in an accurate monitor. The extracted application code reads the actual total memory.
 
