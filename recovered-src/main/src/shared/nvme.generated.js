@@ -1,6 +1,5 @@
-// GENERATED FRAGMENT — extracted from out/main/index.js, lines 180-192.
-// Original module marker: src/shared/nvme.ts. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// GENERATED FRAGMENT — extracted from out/main/index.js, lines 184-196.
+// Original module marker: src/shared/nvme.ts. Not original TypeScript/TSX; not standalone.
 var BITS = [
 	[1, "可用备用空间低于阈值"],
 	[2, "温度超出阈值"],

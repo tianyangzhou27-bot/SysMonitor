@@ -1,6 +1,5 @@
-// GENERATED FRAGMENT — extracted from out/main/index.js, lines 4842-4889.
-// Original module marker: src/main/cooling/identify.ts. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// GENERATED FRAGMENT — extracted from out/main/index.js, lines 4874-4921.
+// Original module marker: src/main/cooling/identify.ts. Not original TypeScript/TSX; not standalone.
 var BOARD_FAN_RE = /^\/lpc\/[\w-]+(\/\d+)?\/fan\/\d+$/;
 var SETTLE_MS = 3500;
 var wait = (ms) => new Promise((r) => setTimeout(r, ms));

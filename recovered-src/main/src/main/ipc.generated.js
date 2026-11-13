@@ -1,6 +1,5 @@
-// GENERATED FRAGMENT — extracted from out/main/index.js, lines 4892-4975.
-// Original module marker: src/main/ipc.ts. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// GENERATED FRAGMENT — extracted from out/main/index.js, lines 4924-5008.
+// Original module marker: src/main/ipc.ts. Not original TypeScript/TSX; not standalone.
 var finite = (v) => typeof v === "number" && Number.isFinite(v);
 function parseHistoryQuery(v) {
 	const q = v;
@@ -23,8 +22,9 @@ function parseSpeedOptions(v) {
 }
 function registerIpc({ store, scheduler, alerts, history }) {
 	const tester = new SpeedTester((hosts) => scheduler.lookupRoute(hosts));
+	electron.ipcMain.handle("theme:get", () => ({mode: electron.nativeTheme.themeSource, resolved: electron.nativeTheme.shouldUseDarkColors ? "dark" : "light"}));
 	electron.ipcMain.on(IPC.themeSet, (_e, mode) => {
-		if (mode === "system" || mode === "light" || mode === "dark") electron.nativeTheme.themeSource = mode;
+		appearance.setTheme(mode);
 	});
 	electron.ipcMain.handle(IPC.metricsGetLatest, () => scheduler.getLatest());
 	electron.ipcMain.handle(IPC.settingsGet, () => store.get());

@@ -1,6 +1,5 @@
-// GENERATED FRAGMENT — extracted from out/main/index.js, lines 75-177.
-// Original module marker: src/shared/cooling.ts. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// GENERATED FRAGMENT — extracted from out/main/index.js, lines 79-181.
+// Original module marker: src/shared/cooling.ts. Not original TypeScript/TSX; not standalone.
 var GROUP_KEYS = [
 	"cpu",
 	"case",

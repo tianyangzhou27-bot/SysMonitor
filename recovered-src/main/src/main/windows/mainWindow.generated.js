@@ -1,6 +1,5 @@
-// GENERATED FRAGMENT — extracted from out/main/index.js, lines 5348-5405.
-// Original module marker: src/main/windows/mainWindow.ts. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// GENERATED FRAGMENT — extracted from out/main/index.js, lines 5391-5448.
+// Original module marker: src/main/windows/mainWindow.ts. Not original TypeScript/TSX; not standalone.
 var registered = false;
 function registerWindowIpc() {
 	if (registered) return;
@@ -26,8 +25,7 @@ function createMainWindow(opts) {
 		show: false,
 		frame: false,
 		icon: opts.icon,
-		backgroundColor: "#00000000",
-		backgroundMaterial: "acrylic",
+		backgroundColor: appearance.solidColor(),
 		title: "SysMonitor",
 		webPreferences: {
 			preload: (0, path.join)(__dirname, "../preload/index.js"),
@@ -36,6 +34,7 @@ function createMainWindow(opts) {
 			sandbox: true
 		}
 	});
+	appearance.attach(win);
 	win.once("ready-to-show", () => {
 		if (!opts.startHidden) win.show();
 	});

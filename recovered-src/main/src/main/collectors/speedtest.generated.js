@@ -1,6 +1,5 @@
-// GENERATED FRAGMENT — extracted from out/main/index.js, lines 4491-4839.
-// Original module marker: src/main/collectors/speedtest.ts. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// GENERATED FRAGMENT — extracted from out/main/index.js, lines 4523-4871.
+// Original module marker: src/main/collectors/speedtest.ts. Not original TypeScript/TSX; not standalone.
 var CF_HOST = "speed.cloudflare.com";
 var DOMESTIC_PATH = "centos-vault/7.9.2009/isos/x86_64/CentOS-7-x86_64-DVD-2009.iso";
 var DOMESTIC_URLS = [

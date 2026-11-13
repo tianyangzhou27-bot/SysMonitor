@@ -1,6 +1,5 @@
 // GENERATED FRAGMENT — extracted from out/renderer/assets/index-CzIv0K4n.js, lines 17751-17768.
-// Original module marker: src/renderer/components/GlassCard.tsx. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// Original module marker: src/renderer/components/GlassCard.tsx. Not original TypeScript/TSX; not standalone.
 function GlassCard({ as: Tag = "article", className = "", onPointerMove, children, ...rest }) {
 	const handleMove = (0, import_react.useCallback)((e) => {
 		const el = e.currentTarget;

@@ -1,6 +1,5 @@
-// GENERATED FRAGMENT — extracted from out/main/index.js, lines 2595-2855.
-// Original module marker: src/main/collectors/proxy.ts. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// GENERATED FRAGMENT — extracted from out/main/index.js, lines 2625-2885.
+// Original module marker: src/main/collectors/proxy.ts. Not original TypeScript/TSX; not standalone.
 var CLIENT_RE = /^(clash-verge|clash-verge-service|verge-mihomo|mihomo|clash-meta|clash|clash-win64|mihomo-party|flclash|clash for windows|clash-nyanpasu|v2rayn|xray|v2ray|sing-box|nekoray|nekobox|hiddify|wireguard|wg|openvpn|openvpn-gui|openvpnserv2?|tailscaled|tailscale-ipn|zerotier-one_x64|shadowsocks|ss-local|trojan|hysteria2?|etalien|etalien_launcher|qv2ray)\.exe$/i;
 var PORT_HINTS = {
 	1080: "SOCKS5",

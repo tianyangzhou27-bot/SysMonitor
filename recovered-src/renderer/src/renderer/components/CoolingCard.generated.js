@@ -1,6 +1,5 @@
 // GENERATED FRAGMENT — extracted from out/renderer/assets/index-CzIv0K4n.js, lines 17933-17997.
-// Original module marker: src/renderer/components/CoolingCard.tsx. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// Original module marker: src/renderer/components/CoolingCard.tsx. Not original TypeScript/TSX; not standalone.
 var temp = (v) => v == null ? "--" : `${v.toFixed(0)}°C`;
 var shown = (f) => f.status !== "unplugged" && f.role !== "none";
 function CoolingCard({ cooling, lhmOnline, onOpenDetail }) {

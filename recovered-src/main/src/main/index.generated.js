@@ -1,6 +1,5 @@
-// GENERATED FRAGMENT — extracted from out/main/index.js, lines 5532-5691.
-// Original module marker: src/main/index.ts. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// GENERATED FRAGMENT — extracted from out/main/index.js, lines 5575-5742.
+// Original module marker: src/main/index.ts. Not original TypeScript/TSX; not standalone.
 var fmtRate = (b) => {
 	if (b == null) return "--";
 	return b >= 1024 ** 2 ? `${(b / 1024 ** 2).toFixed(1)} MB/s` : `${Math.round(b / 1024)} KB/s`;
@@ -28,7 +27,7 @@ else {
 				closeToTray: () => store.get().closeToTray,
 				isQuitting: () => quitting
 			});
-			mainWin.on("closed", () => electron.app.quit());
+			mainWin.on("closed", () => { if (!quitting) electron.app.quit(); });
 		}
 		if (mainWin.isMinimized()) mainWin.restore();
 		mainWin.show();
@@ -36,8 +35,11 @@ else {
 		return mainWin;
 	};
 	electron.app.on("second-instance", () => openMain());
-	electron.app.whenReady().then(() => {
+	electron.app.whenReady().then(async () => {
+        await telegramAlerts.init();
+        processMonitor.init();
 		electron.app.setAppUserModelId("com.sysmonitor.desktop");
+		appearance.restore();
 		store.load();
 		const taskbar = new TaskbarWindow(store.get());
 		const history = new HistoryStore(electron.app.getPath("userData"), store.get().history);
@@ -120,7 +122,19 @@ else {
 		});
 		scheduler.onShellInfo((info) => taskbar.onShell(info));
 		scheduler.onFanSpun((ids) => store.patch({ cooling: { spun: ids } }));
+		telegramAlerts.bindAlertSettings(() => store.get().alerts, (patch) => {
+            const before = { ...store.get().alerts };
+            try {
+                store.patch({ alerts: patch });
+                fs.writeFileSync(store.file + ".tg.tmp", JSON.stringify(store.get(), null, 2), "utf8");
+                fs.renameSync(store.file + ".tg.tmp", store.file);
+                alerts.closeAll();
+                return store.get().alerts;
+            } catch (error) { store.patch({ alerts: before }); throw error; }
+        });
+        telegramAlerts.bindRoute((hosts) => scheduler.lookupRoute(hosts));
 		scheduler.onSnapshot((snap) => {
+			telegramAlerts.sample(snap);
 			alerts.evaluate(snap, store.get().alerts);
 			history.record(Date.now(), allMetrics(snap));
 			tray.setTooltip(tooltipOf(snap));
@@ -137,25 +151,18 @@ else {
 		tray.update(s.taskbar.enabled);
 		applyAutoStart(s.autoStart);
 		scheduler.start(s);
-		let fansReleased = false;
-		electron.app.on("will-quit", (e) => {
-			if (fansReleased) return;
-			e.preventDefault();
-			Promise.race([scheduler.releaseFans(), new Promise((r) => setTimeout(r, 2500))]).finally(() => {
-				fansReleased = true;
-				electron.app.quit();
-			});
-		});
-		electron.app.on("before-quit", () => {
-			quitting = true;
-			scheduler.stop();
-			alerts.closeAll();
-			diagnosis.closeAll();
-			history.close();
-			store.flush();
-			taskbar.close();
-			tray.destroy();
-		});
+        if (!fs.existsSync(path.join(electron.app.getPath("userData"), "telegram-alerts.json"))) telegramAlerts.show();
+		require('./shutdown')(electron.app, () => { quitting = true; }, () => scheduler.releaseFans(), [
+            () => telegramAlerts.stop(),
+            () => processMonitor.stop(),
+            () => scheduler.stop(),
+            () => alerts.closeAll(),
+            () => diagnosis.closeAll(),
+            () => history.close(),
+            () => store.flush(),
+            () => taskbar.close(),
+            () => tray.destroy()
+        ]);
 	});
 	electron.app.on("window-all-closed", () => {
 		electron.app.quit();

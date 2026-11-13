@@ -1,6 +1,5 @@
-// GENERATED FRAGMENT — extracted from out/main/index.js, lines 3864-4366.
-// Original module marker: src/main/diagnosis/rules.ts. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// GENERATED FRAGMENT — extracted from out/main/index.js, lines 3896-4398.
+// Original module marker: src/main/diagnosis/rules.ts. Not original TypeScript/TSX; not standalone.
 var pickTier = (t, s) => s === "conservative" ? t[0] : s === "sensitive" ? t[2] : t[1];
 var pct = (v) => `${v.toFixed(0)}%`;
 var ms = (v) => `${v.toFixed(v < 10 ? 1 : 0)} ms`;

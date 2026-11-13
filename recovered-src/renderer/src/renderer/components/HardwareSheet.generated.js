@@ -1,6 +1,5 @@
 // GENERATED FRAGMENT — extracted from out/renderer/assets/index-CzIv0K4n.js, lines 19126-19501.
-// Original module marker: src/renderer/components/HardwareSheet.tsx. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// Original module marker: src/renderer/components/HardwareSheet.tsx. Not original TypeScript/TSX; not standalone.
 var GB = 1024 ** 3;
 var NA = "无法读取";
 var UNKNOWN = "未提供（不代表没有错误）";

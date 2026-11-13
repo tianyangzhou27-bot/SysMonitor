@@ -1,6 +1,5 @@
-// GENERATED FRAGMENT — extracted from out/renderer/assets/index-CzIv0K4n.js, lines 25918-25941.
-// Original module marker: src/renderer/hooks/useMetrics.ts. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// GENERATED FRAGMENT — extracted from out/renderer/assets/index-CzIv0K4n.js, lines 25859-25882.
+// Original module marker: src/renderer/hooks/useMetrics.ts. Not original TypeScript/TSX; not standalone.
 var push = (arr, v) => v == null ? arr : [...arr, v].slice(-60);
 function useMetrics() {
 	const [state, setState] = (0, import_react.useState)({

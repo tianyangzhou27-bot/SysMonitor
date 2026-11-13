@@ -1,6 +1,5 @@
 // GENERATED FRAGMENT — extracted from out/renderer/assets/index-CzIv0K4n.js, lines 24221-24418.
-// Original module marker: src/renderer/components/NetworkCard.tsx. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// Original module marker: src/renderer/components/NetworkCard.tsx. Not original TypeScript/TSX; not standalone.
 var REACH = {
 	online: {
 		text: "已联网",

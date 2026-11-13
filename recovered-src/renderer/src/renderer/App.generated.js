@@ -1,6 +1,5 @@
-// GENERATED FRAGMENT — extracted from out/renderer/assets/index-CzIv0K4n.js, lines 25995-26170.
-// Original module marker: src/renderer/App.tsx. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// GENERATED FRAGMENT — extracted from out/renderer/assets/index-CzIv0K4n.js, lines 25953-26128.
+// Original module marker: src/renderer/App.tsx. Not original TypeScript/TSX; not standalone.
 function App() {
 	const { mode, cycle } = useTheme();
 	const real = useMetrics();

@@ -1,6 +1,5 @@
-// GENERATED FRAGMENT — extracted from out/renderer/assets/index-CzIv0K4n.js, lines 24813-24890.
-// Original module marker: src/renderer/components/QualityCard.tsx. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// GENERATED FRAGMENT — extracted from out/renderer/assets/index-CzIv0K4n.js, lines 24754-24831.
+// Original module marker: src/renderer/components/QualityCard.tsx. Not original TypeScript/TSX; not standalone.
 var ORDER$1 = [
 	"none",
 	"ok",

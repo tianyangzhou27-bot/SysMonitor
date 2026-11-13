@@ -1,6 +1,5 @@
-// GENERATED FRAGMENT — extracted from out/main/index.js, lines 2326-2505.
-// Original module marker: src/main/collectors/clash.ts. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// GENERATED FRAGMENT — extracted from out/main/index.js, lines 2356-2535.
+// Original module marker: src/main/collectors/clash.ts. Not original TypeScript/TSX; not standalone.
 var PIPE_DIR = "\\\\.\\pipe\\";
 var PROXIES_TTL_MS = 15e3;
 var appKey = (name) => name.toLowerCase().replace(/\.exe$/, "");

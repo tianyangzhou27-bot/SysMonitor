@@ -21,6 +21,10 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 }) : target, mod));
 //#endregion
 let electron = require("electron");
+const appearance = require("./appearance");
+const telegramAlerts = require("./telegram");
+const hardwareValues = require("./hardware-values");
+const processMonitor = require("./process-monitor");
 let os = require("os");
 let path = require("path");
 let systeminformation = require("systeminformation");
@@ -194,6 +198,7 @@ function describeCriticalWarning(bits) {
 //#region src/main/alerts.ts
 var pct$1 = (v) => `${v.toFixed(0)}%`;
 var AlertEngine = class {
+ lastSampleAt = 0;
 	states = /* @__PURE__ */ new Map();
 	media = /* @__PURE__ */ new Map();
 	onClick;
@@ -217,7 +222,10 @@ var AlertEngine = class {
 			this.closeAll(now);
 			return;
 		}
-		const checks = this.checks(s, cfg, now);
+		if (!Number.isFinite(s.ts) || now - s.ts > 15000) return;
+        if (this.lastSampleAt && now - this.lastSampleAt > 15000) { for (const st of this.states.values()) { st.normalSince = null; if (!st.notified) st.since = null; } }
+        this.lastSampleAt = now;
+        const checks = this.checks(s, cfg, now);
 		const live = new Set(checks.map((c) => c.id));
 		for (const [id, st] of this.states) {
 			if (live.has(id)) continue;
@@ -232,12 +240,22 @@ var AlertEngine = class {
 				eventTried: false
 			};
 			this.states.set(c.id, st);
+            if (c.valid === false) { st.normalSince = null; if (!st.notified) st.since = null; continue; }
 			if (!c.hit) {
+                if (st.notified && c.valid === true) {
+                    if (!c.recovered) { st.normalSince = null; continue; }
+                    st.normalSince ??= now;
+                    if (now - st.normalSince < 10000) continue;
+                    const seconds = Math.max(0, Math.round((st.normalSince - st.since) / 1000));
+                    this.notify("恢复正常：" + c.title, c.body + "\n异常持续：" + Math.floor(seconds / 60) + "分" + seconds % 60 + "秒（恢复读数已稳定 10 秒）");
+                }
+                st.notified = false; st.normalSince = null;
 				this.endEvent(st, now);
 				st.since = null;
 				continue;
 			}
-			st.since ??= now;
+			st.normalSince = null;
+            st.since ??= now;
 			const sustained = now - st.since >= cfg.sustainSec * 1e3;
 			if (sustained && !st.eventTried) {
 				st.eventTried = true;
@@ -246,7 +264,8 @@ var AlertEngine = class {
 			const cooled = now - st.firedAt >= cfg.cooldownMin * 6e4;
 			if (sustained && cooled) {
 				st.firedAt = now;
-				this.notify(c.title, c.body);
+				st.notified = true;
+                this.notify(c.title, c.body + "\n已持续：" + Math.floor((now - st.since) / 1000) + "秒");
 			}
 		}
 	}
@@ -254,6 +273,7 @@ var AlertEngine = class {
 		this.notify("SysMonitor 测试通知", "告警功能工作正常。");
 	}
 	notify(title, body) {
+		telegramAlerts.notify(title, body);
 		if (!electron.Notification.isSupported()) return;
 		const n = new electron.Notification({
 			title,
@@ -266,9 +286,11 @@ var AlertEngine = class {
 		const out = [];
 		const over = (id, value, limit, title, text) => out.push({
 			id,
-			hit: value != null && value >= limit,
+			valid: typeof value === "number" && Number.isFinite(value),
+            recovered: typeof value === "number" && Number.isFinite(value) && value <= limit - (/Temp/.test(id) ? 3 : Math.max(1, limit * 0.1)),
+            hit: typeof value === "number" && Number.isFinite(value) && value >= limit,
 			title,
-			body: value != null ? text(value) : ""
+			body: value != null ? text(value).replace(/超过阈值/g, "告警阈值为") : ""
 		});
 		over("cpu", s.cpu.usage, a.cpuUsage, "CPU 使用率过高", (v) => `当前 ${pct$1(v)}，超过阈值 ${a.cpuUsage}%`);
 		over("cpuTemp", s.cpu.tempC, a.cpuTemp, "CPU 温度过高", (v) => `当前 ${v.toFixed(0)}°C，超过阈值 ${a.cpuTemp}°C`);
@@ -369,13 +391,23 @@ var AlertEngine = class {
 			body: reach === "offline" ? "连路由器都无法访问" : "路由器可以访问，但无法连到外网"
 		});
 		over("net-slow", reach === "online" ? s.network.internetLatencyMs : null, a.netLatencyMs, "外网延迟过高", (v) => `当前 ${v} ms，超过阈值 ${a.netLatencyMs} ms`);
-		const top = s.processes.apps.cpu[0];
-		if (top && top.cpuPercent != null) out.push({
-			id: `proc:${top.name}`,
-			hit: top.cpuPercent >= a.procCpu,
-			title: "有程序长时间占用大量 CPU",
-			body: `${top.name} 占用 ${pct$1(top.cpuPercent)}，超过阈值 ${a.procCpu}%`
-		});
+        const fresh = Number.isFinite(s.processes?.ts) && now - s.processes.ts <= 5000;
+        for (const row of s.processes?.rows || []) {
+            if (!row.pid || row.pid <= 0) continue;
+            const identity = row.identity || (row.pid + ':' + row.name);
+            const prefix = row.name + ' · PID ' + row.pid;
+            const memPct = Number.isFinite(row.memBytes) && s.memory.totalBytes > 0 ? row.memBytes / s.memory.totalBytes * 100 : null;
+            for (const [key, label, value, limit] of [
+                ['cpu', 'CPU', row.cpuPercent, a.procCpu ?? 50],
+                ['gpu', 'GPU', row.gpuPercent, a.gpuUsage ?? 95],
+                ['memory', '内存', memPct, a.procMemory ?? 25]
+            ]) {
+                const before = out.length;
+                over('process:' + identity + ':' + key, fresh ? value : null, limit,
+                    '进程' + label + '占用过高', v => prefix + '\n当前' + label + '占用：' + v.toFixed(1) + '%；告警阈值：' + limit + '%' + (key === 'memory' ? '（占物理内存）' : ''));
+                out[before].body += '\n高占用可能来自正常任务，请结合当前工作判断。';
+            }
+        }
 		return out;
 	}
 };
@@ -1171,9 +1203,7 @@ var LhmClient = class {
 		}
 	}
 	cpuTemp() {
-		const temps = this.sensors.filter((s) => s.type === "Temperature" && /^\/(intelcpu|amdcpu)\/\d+\//.test(s.id));
-		const pick = temps.find((s) => s.name === "CPU Package") ?? temps.find((s) => /^Core \((Tctl|Tdie)/.test(s.name));
-		return pick?.value != null && pick.value > 0 ? pick.value : null;
+		return this.online ? hardwareValues.cpuTemperature(this.sensors) : null;
 	}
 	launchOnce() {
 		if (this.launchTried || process.platform !== "win32") return;
@@ -3099,7 +3129,7 @@ var MetricsScheduler = class {
 	}
 	onFast(fast) {
 		const pkgMw = fast.energy?.["RAPL_Package0_PKG"];
-		this.latestCpuW = pkgMw != null ? pkgMw / 1e3 : null;
+		this.latestCpuW = hardwareValues.cpuPower(pkgMw, this.lhm.list(), this.lhm.isOnline());
 		const gpuW = this.gpuPower.watts ?? this.gpuSmi.latest?.powerW ?? null;
 		const power = computePower(this.latestCpuW, gpuW, this.otherWatts, this.wallSource);
 		this.latestPower = power;
@@ -3239,6 +3269,7 @@ var MetricsScheduler = class {
 		const snap = {
 			ts: raw.t,
 			lhmOnline: this.lhm.isOnline(),
+            temperatureSensors: this.lhm.list().filter(s => s.type === "Temperature").map(s => ({ id: s.id, hardware: s.hardware, name: s.name, value: s.value, unit: s.unit, label: this.coolingCfg.names[s.id] ?? null })),
 			frames: this.frames.update(this.framesCfg, this.shellState),
 			perf: this.buildPerf(raw),
 			diagnosis: {
@@ -3303,6 +3334,7 @@ var MetricsScheduler = class {
 				busyPercent: clampPct(raw.diskT["_Total"])
 			}
 		};
+		processMonitor.enrich(raw, snap);
 		for (const cb of this.enrichers) cb(snap);
 		this.latest = snap;
 		for (const win of electron.BrowserWindow.getAllWindows()) if (!win.isDestroyed()) win.webContents.send(IPC.metricsSnapshot, snap);
@@ -4911,8 +4943,9 @@ function parseSpeedOptions(v) {
 }
 function registerIpc({ store, scheduler, alerts, history }) {
 	const tester = new SpeedTester((hosts) => scheduler.lookupRoute(hosts));
+	electron.ipcMain.handle("theme:get", () => ({mode: electron.nativeTheme.themeSource, resolved: electron.nativeTheme.shouldUseDarkColors ? "dark" : "light"}));
 	electron.ipcMain.on(IPC.themeSet, (_e, mode) => {
-		if (mode === "system" || mode === "light" || mode === "dark") electron.nativeTheme.themeSource = mode;
+		appearance.setTheme(mode);
 	});
 	electron.ipcMain.handle(IPC.metricsGetLatest, () => scheduler.getLatest());
 	electron.ipcMain.handle(IPC.settingsGet, () => store.get());
@@ -5005,7 +5038,8 @@ var DEFAULT_SETTINGS = {
 		diskUsage: 95,
 		power: 600,
 		netLatencyMs: 300,
-		procCpu: 50
+		procCpu: 50,
+        procMemory: 25
 	},
 	history: {
 		enabled: true,
@@ -5143,7 +5177,8 @@ function sanitize(raw, base) {
 			diskUsage: num(a.diskUsage, 50, 100, ba.diskUsage),
 			power: num(a.power, 50, 2e3, ba.power),
 			netLatencyMs: num(a.netLatencyMs, 20, 5e3, ba.netLatencyMs),
-			procCpu: num(a.procCpu, 5, 100, ba.procCpu)
+			procCpu: num(a.procCpu, 5, 100, ba.procCpu),
+            procMemory: num(a.procMemory, 5, 100, ba.procMemory ?? 25)
 		},
 		history: {
 			enabled: bool(h.enabled, bh.enabled),
@@ -5325,7 +5360,15 @@ var AppTray = class {
 				click: this.actions.showMain
 			},
 			{
-				label: "设置",
+				label: "进程管理",
+                click: () => processMonitor.show()
+            },
+            {
+                label: "Telegram 报警设置",
+                click: () => telegramAlerts.show()
+            },
+            {
+                label: "设置",
 				click: this.actions.openSettings
 			},
 			{ type: "separator" },
@@ -5370,8 +5413,7 @@ function createMainWindow(opts) {
 		show: false,
 		frame: false,
 		icon: opts.icon,
-		backgroundColor: "#00000000",
-		backgroundMaterial: "acrylic",
+		backgroundColor: appearance.solidColor(),
 		title: "SysMonitor",
 		webPreferences: {
 			preload: (0, path.join)(__dirname, "../preload/index.js"),
@@ -5380,6 +5422,7 @@ function createMainWindow(opts) {
 			sandbox: true
 		}
 	});
+	appearance.attach(win);
 	win.once("ready-to-show", () => {
 		if (!opts.startHidden) win.show();
 	});
@@ -5556,7 +5599,7 @@ else {
 				closeToTray: () => store.get().closeToTray,
 				isQuitting: () => quitting
 			});
-			mainWin.on("closed", () => electron.app.quit());
+			mainWin.on("closed", () => { if (!quitting) electron.app.quit(); });
 		}
 		if (mainWin.isMinimized()) mainWin.restore();
 		mainWin.show();
@@ -5564,8 +5607,11 @@ else {
 		return mainWin;
 	};
 	electron.app.on("second-instance", () => openMain());
-	electron.app.whenReady().then(() => {
+	electron.app.whenReady().then(async () => {
+        await telegramAlerts.init();
+        processMonitor.init();
 		electron.app.setAppUserModelId("com.sysmonitor.desktop");
+		appearance.restore();
 		store.load();
 		const taskbar = new TaskbarWindow(store.get());
 		const history = new HistoryStore(electron.app.getPath("userData"), store.get().history);
@@ -5648,7 +5694,19 @@ else {
 		});
 		scheduler.onShellInfo((info) => taskbar.onShell(info));
 		scheduler.onFanSpun((ids) => store.patch({ cooling: { spun: ids } }));
+		telegramAlerts.bindAlertSettings(() => store.get().alerts, (patch) => {
+            const before = { ...store.get().alerts };
+            try {
+                store.patch({ alerts: patch });
+                fs.writeFileSync(store.file + ".tg.tmp", JSON.stringify(store.get(), null, 2), "utf8");
+                fs.renameSync(store.file + ".tg.tmp", store.file);
+                alerts.closeAll();
+                return store.get().alerts;
+            } catch (error) { store.patch({ alerts: before }); throw error; }
+        });
+        telegramAlerts.bindRoute((hosts) => scheduler.lookupRoute(hosts));
 		scheduler.onSnapshot((snap) => {
+			telegramAlerts.sample(snap);
 			alerts.evaluate(snap, store.get().alerts);
 			history.record(Date.now(), allMetrics(snap));
 			tray.setTooltip(tooltipOf(snap));
@@ -5665,25 +5723,18 @@ else {
 		tray.update(s.taskbar.enabled);
 		applyAutoStart(s.autoStart);
 		scheduler.start(s);
-		let fansReleased = false;
-		electron.app.on("will-quit", (e) => {
-			if (fansReleased) return;
-			e.preventDefault();
-			Promise.race([scheduler.releaseFans(), new Promise((r) => setTimeout(r, 2500))]).finally(() => {
-				fansReleased = true;
-				electron.app.quit();
-			});
-		});
-		electron.app.on("before-quit", () => {
-			quitting = true;
-			scheduler.stop();
-			alerts.closeAll();
-			diagnosis.closeAll();
-			history.close();
-			store.flush();
-			taskbar.close();
-			tray.destroy();
-		});
+        if (!fs.existsSync(path.join(electron.app.getPath("userData"), "telegram-alerts.json"))) telegramAlerts.show();
+		require('./shutdown')(electron.app, () => { quitting = true; }, () => scheduler.releaseFans(), [
+            () => telegramAlerts.stop(),
+            () => processMonitor.stop(),
+            () => scheduler.stop(),
+            () => alerts.closeAll(),
+            () => diagnosis.closeAll(),
+            () => history.close(),
+            () => store.flush(),
+            () => taskbar.close(),
+            () => tray.destroy()
+        ]);
 	});
 	electron.app.on("window-all-closed", () => {
 		electron.app.quit();

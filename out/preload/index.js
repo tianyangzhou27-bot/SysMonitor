@@ -37,6 +37,7 @@ function subscribe(channel, cb) {
 	return () => electron.ipcRenderer.removeListener(channel, handler);
 }
 electron.contextBridge.exposeInMainWorld("api", {
+ processes: { open: () => electron.ipcRenderer.send("process:open") },
 	win: {
 		minimize: () => electron.ipcRenderer.send(IPC.winMinimize),
 		toggleMaximize: () => electron.ipcRenderer.send(IPC.winToggleMaximize),
@@ -44,7 +45,7 @@ electron.contextBridge.exposeInMainWorld("api", {
 		isMaximized: () => electron.ipcRenderer.invoke(IPC.winIsMaximized),
 		onMaximizedChange: (cb) => subscribe(IPC.winMaximizedChanged, cb)
 	},
-	theme: { set: (mode) => electron.ipcRenderer.send(IPC.themeSet, mode) },
+	theme: { set: (mode) => electron.ipcRenderer.send(IPC.themeSet, mode), get: () => electron.ipcRenderer.invoke("theme:get"), onChange: (cb) => subscribe("theme:changed", cb) },
 	metrics: {
 		getLatest: () => electron.ipcRenderer.invoke(IPC.metricsGetLatest),
 		onSnapshot: (cb) => subscribe(IPC.metricsSnapshot, cb)

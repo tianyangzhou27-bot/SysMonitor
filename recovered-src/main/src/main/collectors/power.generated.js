@@ -1,6 +1,5 @@
-// GENERATED FRAGMENT — extracted from out/main/index.js, lines 2307-2323.
-// Original module marker: src/main/collectors/power.ts. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// GENERATED FRAGMENT — extracted from out/main/index.js, lines 2337-2353.
+// Original module marker: src/main/collectors/power.ts. Not original TypeScript/TSX; not standalone.
 function computePower(cpuW, gpuW, otherW, wall) {
 	const measured = wall?.getWatts() ?? null;
 	if (wall && measured != null) return {

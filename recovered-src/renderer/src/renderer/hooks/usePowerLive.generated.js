@@ -1,6 +1,5 @@
 // GENERATED FRAGMENT — extracted from out/renderer/assets/index-CzIv0K4n.js, lines 24421-24447.
-// Original module marker: src/renderer/hooks/usePowerLive.ts. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// Original module marker: src/renderer/hooks/usePowerLive.ts. Not original TypeScript/TSX; not standalone.
 function usePowerLive(fallback) {
 	const [live, setLive] = (0, import_react.useState)(null);
 	const [history, setHistory] = (0, import_react.useState)([]);

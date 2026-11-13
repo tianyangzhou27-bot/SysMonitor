@@ -1,5 +1,20 @@
 # Permissions, data and privacy
 
+## Current snapshot: 2026-11-13 (takes precedence over the older audit below)
+
+**Settings, monitoring history, and accumulated energy are stored locally. The application has no feature automatically synchronizing those files to a developer-operated server. Optional Telegram features transmit monitoring information, so it cannot promise that data never leaves the PC.** Public-IP and connectivity checks also run automatically. Older statements below about no account/upload service do not cover the newly added Telegram integration.
+
+- Telegram uses `api.telegram.org`. Chat discovery, testing, and manual reports make network requests. Once a token and Chat ID are configured, enabled command listening polls Telegram. Alert delivery and command listening are independent; commands are checked by default.
+- Tests include computer name and time. Reports, alerts, rankings, temperature and network queries may include computer name, hardware models, load, temperatures, power, energy, process names/usage, local/public IPs, gateway, DNS, proxy routes and node names. Telegram and recipients can retain these messages.
+- To stop background Telegram requests, disable and save both switches and avoid discovery/test/report buttons. This does not stop built-in public-IP/connectivity checks.
+- Additional local files: `telegram-alerts.json` (encrypted token, Chat ID, proxy, switches), `telegram-command-state.json` (poll progress), `telegram-runtime.json` (runtime status), and `telegram-energy.json` (energy totals). Only the token is encrypted with Electron safeStorage; other configuration is not encrypted storage.
+- The local process helper reads process details and ETW network counters and can terminate a single process after user confirmation. Authorized Telegram private-chat controls can also change alert settings.
+- Release packages exclude personal settings, databases, Telegram configuration, and logs. User-initiated exports, backups, messages, or issue reports may take data outside the computer.
+
+[User guide](USER_GUIDE.md) · [中文隐私说明](PERMISSIONS_AND_PRIVACY.zh-CN.md)
+
+## Earlier baseline audit
+
 Applies to the extracted SysMonitor 0.1.0 release; code reviewed on 2026-10-21. This describes **capabilities invoked by the reviewed build** and when they are used. It is not an independent certification of every dependency.
 
 ## At a glance

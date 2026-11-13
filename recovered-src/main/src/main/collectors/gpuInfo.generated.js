@@ -1,6 +1,5 @@
-// GENERATED FRAGMENT — extracted from out/main/index.js, lines 691-847.
-// Original module marker: src/main/collectors/gpuInfo.ts. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// GENERATED FRAGMENT — extracted from out/main/index.js, lines 723-879.
+// Original module marker: src/main/collectors/gpuInfo.ts. Not original TypeScript/TSX; not standalone.
 var SMI_FIELDS = [
 	"name",
 	"driver_version",

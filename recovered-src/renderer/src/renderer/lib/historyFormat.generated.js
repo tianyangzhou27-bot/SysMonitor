@@ -1,6 +1,5 @@
 // GENERATED FRAGMENT — extracted from out/renderer/assets/index-CzIv0K4n.js, lines 18064-18158.
-// Original module marker: src/renderer/lib/historyFormat.ts. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// Original module marker: src/renderer/lib/historyFormat.ts. Not original TypeScript/TSX; not standalone.
 var PALETTE = [
 	"#4f9cff",
 	"#ff8a4c",

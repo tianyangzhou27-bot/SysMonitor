@@ -1,6 +1,5 @@
-// GENERATED FRAGMENT — extracted from out/main/index.js, lines 430-438.
-// Original module marker: src/main/collectors/disk.ts. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// GENERATED FRAGMENT — extracted from out/main/index.js, lines 462-470.
+// Original module marker: src/main/collectors/disk.ts. Not original TypeScript/TSX; not standalone.
 async function readVolumes() {
 	return (await systeminformation.fsSize()).filter((d) => d.size > 0 && /^[A-Za-z]:/.test(d.mount)).map((d) => ({
 		mount: d.mount,

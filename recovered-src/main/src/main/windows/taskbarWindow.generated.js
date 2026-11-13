@@ -1,6 +1,5 @@
-// GENERATED FRAGMENT — extracted from out/main/index.js, lines 5420-5529.
-// Original module marker: src/main/windows/taskbarWindow.ts. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// GENERATED FRAGMENT — extracted from out/main/index.js, lines 5463-5572.
+// Original module marker: src/main/windows/taskbarWindow.ts. Not original TypeScript/TSX; not standalone.
 var GAP = 8;
 var TaskbarWindow = class {
 	settings;

@@ -1,6 +1,5 @@
-// GENERATED FRAGMENT — extracted from out/main/index.js, lines 2508-2592.
-// Original module marker: src/main/collectors/processes.ts. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// GENERATED FRAGMENT — extracted from out/main/index.js, lines 2538-2622.
+// Original module marker: src/main/collectors/processes.ts. Not original TypeScript/TSX; not standalone.
 var TOP = 10;
 var sortBy = (rows, pick) => [...rows].sort((a, b) => pick(b) - pick(a)).slice(0, TOP);
 function buildProcessMetrics(raw, logicalCores, clashRates, connCounts) {

@@ -1,6 +1,5 @@
 // GENERATED FRAGMENT — extracted from out/preload/index.js, lines 3-31.
-// Original module marker: src/shared/ipc-channels.ts. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// Original module marker: src/shared/ipc-channels.ts. Not original TypeScript/TSX; not standalone.
 var IPC = {
 	winMinimize: "win:minimize",
 	winToggleMaximize: "win:toggle-maximize",

@@ -1,6 +1,5 @@
-// GENERATED FRAGMENT — extracted from out/main/index.js, lines 1218-1437.
-// Original module marker: src/main/cooling/controller.ts. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// GENERATED FRAGMENT — extracted from out/main/index.js, lines 1248-1467.
+// Original module marker: src/main/cooling/controller.ts. Not original TypeScript/TSX; not standalone.
 var REASSERT_MS = 2e4;
 var MISMATCH_MS = 12e3;
 var MISMATCH_PCT = 6;

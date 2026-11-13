@@ -1,6 +1,5 @@
-// GENERATED FRAGMENT — extracted from out/renderer/assets/index-CzIv0K4n.js, lines 24893-25414.
-// Original module marker: src/renderer/components/SettingsSheet.tsx. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// GENERATED FRAGMENT — extracted from out/renderer/assets/index-CzIv0K4n.js, lines 24834-25355.
+// Original module marker: src/renderer/components/SettingsSheet.tsx. Not original TypeScript/TSX; not standalone.
 var REFRESH = [
 	{
 		v: 500,

@@ -1,8 +1,8 @@
-// GENERATED FRAGMENT — extracted from out/main/index.js, lines 195-381.
-// Original module marker: src/main/alerts.ts. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// GENERATED FRAGMENT — extracted from out/main/index.js, lines 199-413.
+// Original module marker: src/main/alerts.ts. Not original TypeScript/TSX; not standalone.
 var pct$1 = (v) => `${v.toFixed(0)}%`;
 var AlertEngine = class {
+ lastSampleAt = 0;
 	states = /* @__PURE__ */ new Map();
 	media = /* @__PURE__ */ new Map();
 	onClick;
@@ -26,7 +26,10 @@ var AlertEngine = class {
 			this.closeAll(now);
 			return;
 		}
-		const checks = this.checks(s, cfg, now);
+		if (!Number.isFinite(s.ts) || now - s.ts > 15000) return;
+        if (this.lastSampleAt && now - this.lastSampleAt > 15000) { for (const st of this.states.values()) { st.normalSince = null; if (!st.notified) st.since = null; } }
+        this.lastSampleAt = now;
+        const checks = this.checks(s, cfg, now);
 		const live = new Set(checks.map((c) => c.id));
 		for (const [id, st] of this.states) {
 			if (live.has(id)) continue;
@@ -41,12 +44,22 @@ var AlertEngine = class {
 				eventTried: false
 			};
 			this.states.set(c.id, st);
+            if (c.valid === false) { st.normalSince = null; if (!st.notified) st.since = null; continue; }
 			if (!c.hit) {
+                if (st.notified && c.valid === true) {
+                    if (!c.recovered) { st.normalSince = null; continue; }
+                    st.normalSince ??= now;
+                    if (now - st.normalSince < 10000) continue;
+                    const seconds = Math.max(0, Math.round((st.normalSince - st.since) / 1000));
+                    this.notify("恢复正常：" + c.title, c.body + "\n异常持续：" + Math.floor(seconds / 60) + "分" + seconds % 60 + "秒（恢复读数已稳定 10 秒）");
+                }
+                st.notified = false; st.normalSince = null;
 				this.endEvent(st, now);
 				st.since = null;
 				continue;
 			}
-			st.since ??= now;
+			st.normalSince = null;
+            st.since ??= now;
 			const sustained = now - st.since >= cfg.sustainSec * 1e3;
 			if (sustained && !st.eventTried) {
 				st.eventTried = true;
@@ -55,7 +68,8 @@ var AlertEngine = class {
 			const cooled = now - st.firedAt >= cfg.cooldownMin * 6e4;
 			if (sustained && cooled) {
 				st.firedAt = now;
-				this.notify(c.title, c.body);
+				st.notified = true;
+                this.notify(c.title, c.body + "\n已持续：" + Math.floor((now - st.since) / 1000) + "秒");
 			}
 		}
 	}
@@ -63,6 +77,7 @@ var AlertEngine = class {
 		this.notify("SysMonitor 测试通知", "告警功能工作正常。");
 	}
 	notify(title, body) {
+		telegramAlerts.notify(title, body);
 		if (!electron.Notification.isSupported()) return;
 		const n = new electron.Notification({
 			title,
@@ -75,9 +90,11 @@ var AlertEngine = class {
 		const out = [];
 		const over = (id, value, limit, title, text) => out.push({
 			id,
-			hit: value != null && value >= limit,
+			valid: typeof value === "number" && Number.isFinite(value),
+            recovered: typeof value === "number" && Number.isFinite(value) && value <= limit - (/Temp/.test(id) ? 3 : Math.max(1, limit * 0.1)),
+            hit: typeof value === "number" && Number.isFinite(value) && value >= limit,
 			title,
-			body: value != null ? text(value) : ""
+			body: value != null ? text(value).replace(/超过阈值/g, "告警阈值为") : ""
 		});
 		over("cpu", s.cpu.usage, a.cpuUsage, "CPU 使用率过高", (v) => `当前 ${pct$1(v)}，超过阈值 ${a.cpuUsage}%`);
 		over("cpuTemp", s.cpu.tempC, a.cpuTemp, "CPU 温度过高", (v) => `当前 ${v.toFixed(0)}°C，超过阈值 ${a.cpuTemp}°C`);
@@ -178,13 +195,23 @@ var AlertEngine = class {
 			body: reach === "offline" ? "连路由器都无法访问" : "路由器可以访问，但无法连到外网"
 		});
 		over("net-slow", reach === "online" ? s.network.internetLatencyMs : null, a.netLatencyMs, "外网延迟过高", (v) => `当前 ${v} ms，超过阈值 ${a.netLatencyMs} ms`);
-		const top = s.processes.apps.cpu[0];
-		if (top && top.cpuPercent != null) out.push({
-			id: `proc:${top.name}`,
-			hit: top.cpuPercent >= a.procCpu,
-			title: "有程序长时间占用大量 CPU",
-			body: `${top.name} 占用 ${pct$1(top.cpuPercent)}，超过阈值 ${a.procCpu}%`
-		});
+        const fresh = Number.isFinite(s.processes?.ts) && now - s.processes.ts <= 5000;
+        for (const row of s.processes?.rows || []) {
+            if (!row.pid || row.pid <= 0) continue;
+            const identity = row.identity || (row.pid + ':' + row.name);
+            const prefix = row.name + ' · PID ' + row.pid;
+            const memPct = Number.isFinite(row.memBytes) && s.memory.totalBytes > 0 ? row.memBytes / s.memory.totalBytes * 100 : null;
+            for (const [key, label, value, limit] of [
+                ['cpu', 'CPU', row.cpuPercent, a.procCpu ?? 50],
+                ['gpu', 'GPU', row.gpuPercent, a.gpuUsage ?? 95],
+                ['memory', '内存', memPct, a.procMemory ?? 25]
+            ]) {
+                const before = out.length;
+                over('process:' + identity + ':' + key, fresh ? value : null, limit,
+                    '进程' + label + '占用过高', v => prefix + '\n当前' + label + '占用：' + v.toFixed(1) + '%；告警阈值：' + limit + '%' + (key === 'memory' ? '（占物理内存）' : ''));
+                out[before].body += '\n高占用可能来自正常任务，请结合当前工作判断。';
+            }
+        }
 		return out;
 	}
 };

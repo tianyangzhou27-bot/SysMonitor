@@ -1,6 +1,5 @@
 // GENERATED FRAGMENT — extracted from out/renderer/assets/index-CzIv0K4n.js, lines 24101-24172.
-// Original module marker: src/renderer/components/Sparkline.tsx. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// Original module marker: src/renderer/components/Sparkline.tsx. Not original TypeScript/TSX; not standalone.
 var W = 120;
 var H = 40;
 function smoothPath(pts) {

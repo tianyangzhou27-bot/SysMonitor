@@ -1,6 +1,5 @@
 // GENERATED FRAGMENT — extracted from out/renderer/assets/index-CzIv0K4n.js, lines 24450-24466.
-// Original module marker: src/renderer/components/PowerCard.tsx. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// Original module marker: src/renderer/components/PowerCard.tsx. Not original TypeScript/TSX; not standalone.
 var watts = (w) => w == null ? "--" : Math.round(w);
 function PowerCard({ fallback }) {
 	const { power, history } = usePowerLive(fallback);

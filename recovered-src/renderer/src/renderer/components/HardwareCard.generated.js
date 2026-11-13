@@ -1,6 +1,5 @@
 // GENERATED FRAGMENT — extracted from out/renderer/assets/index-CzIv0K4n.js, lines 19018-19108.
-// Original module marker: src/renderer/components/HardwareCard.tsx. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// Original module marker: src/renderer/components/HardwareCard.tsx. Not original TypeScript/TSX; not standalone.
 var GB$1 = 1024 ** 3;
 function HardwareCard({ hw, cpu, psu, onOpenDetail }) {
 	const down = (0, import_react.useRef)(null);

@@ -2,6 +2,10 @@
 
 This repository includes or uses third-party software. Their copyrights and licenses remain with their respective owners. 本仓库包含或依赖第三方软件，其版权与许可证仍归原权利人所有。
 
+The November 13 snapshot also includes the .NET Framework 4.8 process collector and its dependencies in `resources/processes/`. Package identities, versions, and available license texts are retained in [`resources/processes/licenses/`](resources/processes/licenses/), including Microsoft TraceEvent and System/Microsoft support libraries. The collector's original C# source was not available in the supplied files. / 11 月 13 日快照新增 .NET Framework 4.8 进程采集助手及依赖，对应包标识、版本和随附许可保存在上述目录；尚未取得助手的原始 C# 源码。
+
+Windows release archives retain `LICENSE.electron.txt`, `LICENSES.chromium.html`, and `resources/PresentMon-LICENSE.txt` from the supplied runtime. / Windows 发布包保留原运行环境的 Electron、Chromium 和 PresentMon 许可文件。
+
 | Component | Usage | License |
 | --- | --- | --- |
 | [Intel PresentMon](https://github.com/GameTechDev/PresentMon) | `vendor/PresentMon/PresentMon.exe` | License text: [`vendor/PresentMon/LICENSE.txt`](vendor/PresentMon/LICENSE.txt) |

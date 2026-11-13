@@ -1,6 +1,5 @@
 // GENERATED FRAGMENT — extracted from out/renderer/assets/index-CzIv0K4n.js, lines 18000-18061.
-// Original module marker: src/renderer/lib/diag.ts. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// Original module marker: src/renderer/lib/diag.ts. Not original TypeScript/TSX; not standalone.
 /** 历史事件的标题；画面卡顿的旧记录标题里没有程序名，从证据的「程序」一项补上 */
 function eventTitle(e) {
 	if (e.key !== "frame-stutter" || e.title.includes(" · ")) return e.title;

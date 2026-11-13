@@ -1,6 +1,5 @@
-// GENERATED FRAGMENT — extracted from out/renderer/assets/index-CzIv0K4n.js, lines 25417-25672.
-// Original module marker: src/renderer/components/SpeedTestCard.tsx. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// GENERATED FRAGMENT — extracted from out/renderer/assets/index-CzIv0K4n.js, lines 25358-25613.
+// Original module marker: src/renderer/components/SpeedTestCard.tsx. Not original TypeScript/TSX; not standalone.
 var PHASE_LABEL = {
 	latency: "延迟测试",
 	download: "下载测试",

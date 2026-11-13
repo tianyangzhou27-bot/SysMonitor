@@ -1,6 +1,5 @@
 // GENERATED FRAGMENT — extracted from out/renderer/assets/index-CzIv0K4n.js, lines 18161-18251.
-// Original module marker: src/renderer/components/DiagCard.tsx. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// Original module marker: src/renderer/components/DiagCard.tsx. Not original TypeScript/TSX; not standalone.
 var HOUR = 36e5;
 function DiagCard({ diag, frames, onOpenDetail }) {
 	const down = (0, import_react.useRef)(null);

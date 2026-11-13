@@ -1,6 +1,5 @@
-// GENERATED FRAGMENT — extracted from out/main/index.js, lines 3314-3417.
-// Original module marker: src/main/history/metrics.ts. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// GENERATED FRAGMENT — extracted from out/main/index.js, lines 3346-3449.
+// Original module marker: src/main/history/metrics.ts. Not original TypeScript/TSX; not standalone.
 var num$1 = (v) => v != null && Number.isFinite(v) ? v : null;
 var maxOf = (a, b) => a == null && b == null ? null : Math.max(a ?? 0, b ?? 0);
 var sumOf = (a, b) => a == null && b == null ? null : (a ?? 0) + (b ?? 0);

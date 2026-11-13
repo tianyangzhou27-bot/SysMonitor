@@ -1,6 +1,5 @@
 // GENERATED FRAGMENT — extracted from out/renderer/assets/index-CzIv0K4n.js, lines 17488-17623.
-// Original module marker: src/renderer/lib/layout.ts. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// Original module marker: src/renderer/lib/layout.ts. Not original TypeScript/TSX; not standalone.
 var import_client = require_client();
 var CARD_IDS = [
 	"cpu",

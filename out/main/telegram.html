@@ -1,0 +1,12 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'none'"><title>Telegram 报警设置</title>
+<style>body{font:15px/1.65 'Segoe UI','Microsoft YaHei',sans-serif;background:#f4f7fb;color:#182334;margin:28px}h1{font-size:25px;margin:0}p{color:#506077;margin:8px 0 20px}label{display:block;margin-top:14px;font-weight:600}input:not([type=checkbox]),select{box-sizing:border-box;width:100%;padding:10px;border:1px solid #c5cfdd;border-radius:7px;background:white;font:inherit}small{display:block;color:#607086}button{padding:10px 16px;margin:14px 8px 0 0;border:0;border-radius:7px;background:#2375d8;color:white;font:inherit;cursor:pointer}button:disabled{opacity:.5}#status{white-space:pre-wrap;background:white;border-radius:8px;padding:12px;margin-top:18px;overflow-wrap:anywhere}input[type=checkbox]{width:18px;height:18px;vertical-align:middle}</style></head>
+<body><h1>Telegram 报警与状态查询</h1><p>异常自动提醒；发送 /menu 打开主菜单，点击查看电脑状态、进程排行、温度、网络和用电。</p>
+<small>① 向 @BotFather 发送 /newbot 创建专用机器人。<br>② 打开新机器人发送 /start。<br>③ 填写 Token，保存后读取私聊，选择自己并测试。</small>
+<label for="token">Bot Token</label><input id="token" type="password" autocomplete="off" placeholder="粘贴 BotFather 提供的 Token"><small id="tokenHint">Token 使用 Windows 加密后保存在本机。</small>
+<label for="proxy">代理（可选）</label><input id="proxy" placeholder="留空使用系统代理，例如 http://127.0.0.1:7890"><small>填写你实际使用的 HTTP 或 SOCKS5 代理端口。</small>
+<button id="discover">保存并读取私聊</button><select id="chats" hidden aria-label="选择自己的私聊"></select>
+<label for="chatId">接收私聊 Chat ID</label><input id="chatId" placeholder="从上方选择，或手动填写数字 ID">
+<label><input type="checkbox" id="enabled"> 启用 Telegram 报警推送</label><small>沿用程序已有的报警阈值、持续时间与冷却间隔；程序的告警总开关也需要开启。</small>
+<label><input type="checkbox" id="commandsEnabled"> 启用 TG 私聊指令查询</label><small>仅绑定的私聊可以查询。/menu 按钮主菜单 · /status 总览 · /power 功耗电量 · /network 网络线路。电量按有效功耗采样累计，缺失时段不补算。</small>
+<button id="save">保存设置</button><button id="test">保存并发送测试</button><button id="report">发送状态报告</button><button id="refresh">刷新状态</button><div id="status" role="status">正在读取设置…</div>
+<script src="telegram-ui.js"></script></body></html>

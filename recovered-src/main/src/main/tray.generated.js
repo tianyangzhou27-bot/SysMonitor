@@ -1,6 +1,5 @@
-// GENERATED FRAGMENT — extracted from out/main/index.js, lines 5290-5345.
-// Original module marker: src/main/tray.ts. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// GENERATED FRAGMENT — extracted from out/main/index.js, lines 5325-5388.
+// Original module marker: src/main/tray.ts. Not original TypeScript/TSX; not standalone.
 var AppTray = class {
 	actions;
 	tray = null;
@@ -39,7 +38,15 @@ var AppTray = class {
 				click: this.actions.showMain
 			},
 			{
-				label: "设置",
+				label: "进程管理",
+                click: () => processMonitor.show()
+            },
+            {
+                label: "Telegram 报警设置",
+                click: () => telegramAlerts.show()
+            },
+            {
+                label: "设置",
 				click: this.actions.openSettings
 			},
 			{ type: "separator" },

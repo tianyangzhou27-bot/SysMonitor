@@ -1,6 +1,5 @@
-// GENERATED FRAGMENT — extracted from out/main/index.js, lines 2929-2942.
-// Original module marker: src/main/collectors/tunnels.ts. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// GENERATED FRAGMENT — extracted from out/main/index.js, lines 2959-2972.
+// Original module marker: src/main/collectors/tunnels.ts. Not original TypeScript/TSX; not standalone.
 var RULES$1 = [
 	[/wintun|meta tunnel|mihomo|clash|sing-?tun|\btun\b/i, "TUN"],
 	[/wireguard|nordlynx/i, "WireGuard"],

@@ -1,6 +1,5 @@
-// GENERATED FRAGMENT — extracted from out/main/index.js, lines 2066-2220.
-// Original module marker: src/main/collectors/network.ts. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// GENERATED FRAGMENT — extracted from out/main/index.js, lines 2096-2250.
+// Original module marker: src/main/collectors/network.ts. Not original TypeScript/TSX; not standalone.
 var INTERNET_PROBE = {
 	host: "223.5.5.5",
 	port: 443

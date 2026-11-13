@@ -1,6 +1,5 @@
-// GENERATED FRAGMENT — extracted from out/main/index.js, lines 2858-2926.
-// Original module marker: src/main/collectors/quality.ts. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// GENERATED FRAGMENT — extracted from out/main/index.js, lines 2888-2956.
+// Original module marker: src/main/collectors/quality.ts. Not original TypeScript/TSX; not standalone.
 var HISTORY = 60;
 var INTERVAL_MS = 2e3;
 var QualityCollector = class {

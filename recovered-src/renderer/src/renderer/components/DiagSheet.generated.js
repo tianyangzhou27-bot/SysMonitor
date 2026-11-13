@@ -1,6 +1,5 @@
 // GENERATED FRAGMENT — extracted from out/renderer/assets/index-CzIv0K4n.js, lines 18254-18477.
-// Original module marker: src/renderer/components/DiagSheet.tsx. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// Original module marker: src/renderer/components/DiagSheet.tsx. Not original TypeScript/TSX; not standalone.
 var DAY = 864e5;
 function ExtraBlock({ extra }) {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {

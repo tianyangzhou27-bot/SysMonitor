@@ -1,6 +1,5 @@
-// GENERATED FRAGMENT — extracted from out/renderer/assets/index-CzIv0K4n.js, lines 24590-24810.
-// Original module marker: src/renderer/components/ProxyCard.tsx. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// GENERATED FRAGMENT — extracted from out/renderer/assets/index-CzIv0K4n.js, lines 24531-24751.
+// Original module marker: src/renderer/components/ProxyCard.tsx. Not original TypeScript/TSX; not standalone.
 var ROUTE_LABEL = {
 	direct: "直连",
 	"system-proxy": "系统代理",

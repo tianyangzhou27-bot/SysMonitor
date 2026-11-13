@@ -1,6 +1,5 @@
-// GENERATED FRAGMENT — extracted from out/main/index.js, lines 1835-2001.
-// Original module marker: src/main/collectors/storage.ts. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// GENERATED FRAGMENT — extracted from out/main/index.js, lines 1865-2031.
+// Original module marker: src/main/collectors/storage.ts. Not original TypeScript/TSX; not standalone.
 var DRIVE_RE = /^\/(nvme|ssd|hdd)\/\d+\//;
 var UNIT_BYTES = 512e3;
 var GIB_TO_GB = 1024 ** 3 / 1e9;

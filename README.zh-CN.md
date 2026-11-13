@@ -2,6 +2,10 @@
 
 简体中文 | [English](README.md)
 
+**[下载 Windows 程序](https://github.com/tianyangzhou27-bot/SysMonitor/releases) · [使用说明](docs/USER_GUIDE.zh-CN.md) · [更新专区](updates/README.md) · [隐私说明](docs/PERMISSIONS_AND_PRIVACY.zh-CN.md)**
+
+当前快照：`v0.1.0-20261113.1`（2026-11-13），包含进程管理、温度显示、Telegram 报警与恢复通知、远程状态查询和告警设置。设置和历史记录保存在本机。**可选 Telegram 功能会将相关监控信息发送到 Telegram；公网 IP 与连通性检测也会联网。** 本程序不是严格离线软件。
+
 SysMonitor 是 Windows 桌面系统监控程序，提供任务栏悬浮显示、托盘操作、性能历史、提醒和可选的风扇控制。本仓库包含从用户提供的 Electron 安装目录中提取的 **0.1.0 版可运行构建代码**。提供的文件中没有原始 TypeScript/React 工程、构建配置或未打包的前端源码。`out/` 内是生成后的 JavaScript 和 CSS，可作为恢复源码的起点，但不是原始开发工程。
 
 ## 功能
@@ -33,9 +37,11 @@ npm start
 
 `npm start` 通过 Electron 启动已提取的程序，不需要再次构建。可以运行 `npm run check` 检查提取出的 JavaScript 语法。
 
+源码模式使用进程管理前，请先把同版本 Windows 完整包中的整个 `resources/processes` 目录复制到仓库。体积较大的运行 DLL 随发布 ZIP 提供，Git 中保留许可证，详见[进程依赖说明](resources/processes/README.md)。
+
 如果使用 pnpm，请运行 `pnpm install`；若安装阶段没有下载 Electron 可执行文件，再运行 `pnpm exec install-electron`，最后执行 `pnpm start`。
 
-如果使用已有的 Windows 打包版，请在原目录运行 `SysMonitor.exe`，并保持旁边的文件及 `resources` 目录完整。打包版内含完整的 Electron/Chromium 运行环境，因此未放进本仓库。
+普通用户可从 [Releases](https://github.com/tianyangzhou27-bot/SysMonitor/releases) 下载 Windows 完整 ZIP 包，解压后运行 `SysMonitor.exe`，并保持旁边的文件及 `resources` 目录完整。完整 Electron/Chromium 运行环境放在发布附件，不放入 Git 代码历史。
 
 ## 可选硬件功能
 
@@ -63,6 +69,9 @@ Add-LocalGroupMember -SID S-1-5-32-559 -Member "$env:USERDOMAIN\$env:USERNAME"
 | --- | --- |
 | `out/main/`、`out/preload/`、`out/renderer/` | 从 Electron 包中提取的应用构建代码 |
 | `resources/` | PowerShell 硬件及网络脚本、图标 |
+| `resources/processes/` | 进程采集助手、依赖与许可证；C# 原始源码尚未找回 |
+| `updates/` | 独立更新下载入口及双语版本说明 |
+| `tools/` | 历史 ASAR 补丁脚本；当前版本无需执行，不能重复套用 |
 | `vendor/PresentMon/` | Intel PresentMon 程序和许可证 |
 | `recovered-src/` | 按原模块标记拆分的生成 JavaScript；不是独立可编译的原始 TypeScript 源码 |
 | `docs/` | 中英文详细功能与权限/隐私文档 |
@@ -72,3 +81,5 @@ Add-LocalGroupMember -SID S-1-5-32-559 -Member "$env:USERDOMAIN\$env:USERNAME"
 ## 许可与来源
 
 本仓库的 SysMonitor 应用代码按 [MIT License](LICENSE) 开源。打包进来的第三方软件保留各自版权及许可证，见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。如果要继续开发，最好找回原始工程；当前提取版不包含原始源码结构。
+
+提供的文件中未找到 `SysMonitor-Processes.exe` 对应的 C# 源码，目前随附其二进制以保持功能可用。因此本次发布不宣称所有组件均具备完整源码或可复现构建；可运行 JavaScript 与还原片段已公开供审阅和修改。

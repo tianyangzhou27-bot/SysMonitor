@@ -1,6 +1,5 @@
 // GENERATED FRAGMENT — extracted from out/renderer/assets/index-CzIv0K4n.js, lines 18529-18989.
-// Original module marker: src/renderer/components/CoolingSheet.tsx. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// Original module marker: src/renderer/components/CoolingSheet.tsx. Not original TypeScript/TSX; not standalone.
 var ROLES = [
 	"unset",
 	"cpu",

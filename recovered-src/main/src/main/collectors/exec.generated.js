@@ -1,6 +1,5 @@
-// GENERATED FRAGMENT — extracted from out/main/index.js, lines 652-688.
-// Original module marker: src/main/collectors/exec.ts. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// GENERATED FRAGMENT — extracted from out/main/index.js, lines 684-720.
+// Original module marker: src/main/collectors/exec.ts. Not original TypeScript/TSX; not standalone.
 function runCapture(cmd, args, timeoutMs = 8e3) {
 	return new Promise((resolve) => {
 		let settled = false;

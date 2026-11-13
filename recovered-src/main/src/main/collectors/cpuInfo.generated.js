@@ -1,6 +1,5 @@
-// GENERATED FRAGMENT — extracted from out/main/index.js, lines 384-427.
-// Original module marker: src/main/collectors/cpuInfo.ts. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// GENERATED FRAGMENT — extracted from out/main/index.js, lines 416-459.
+// Original module marker: src/main/collectors/cpuInfo.ts. Not original TypeScript/TSX; not standalone.
 var HYBRID_TABLE = [
 	{
 		match: /\b1[34]9\d\d/,

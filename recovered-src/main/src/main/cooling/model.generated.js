@@ -1,6 +1,5 @@
-// GENERATED FRAGMENT — extracted from out/main/index.js, lines 1734-1832.
-// Original module marker: src/main/cooling/model.ts. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// GENERATED FRAGMENT — extracted from out/main/index.js, lines 1764-1862.
+// Original module marker: src/main/cooling/model.ts. Not original TypeScript/TSX; not standalone.
 var SPIN_RPM = 200;
 var STALL_MS = 3e4;
 var LOW_DUTY = 20;

@@ -1,6 +1,5 @@
-// GENERATED FRAGMENT — extracted from out/main/index.js, lines 1069-1215.
-// Original module marker: src/main/collectors/lhm.ts. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// GENERATED FRAGMENT — extracted from out/main/index.js, lines 1101-1245.
+// Original module marker: src/main/collectors/lhm.ts. Not original TypeScript/TSX; not standalone.
 var VALUE_RE = /^\s*(-?[\d.,]+)\s*(.*?)\s*$/;
 var SENSOR_ID_RE$1 = /^\/[\w-]+(\/[\w-]+){2,4}$/;
 var CONTROL_ID_RE = /^\/(lpc|gpu-[a-z]+)\/[\w-]+(\/\d+)?\/control\/\d+$/;
@@ -106,9 +105,7 @@ var LhmClient = class {
 		}
 	}
 	cpuTemp() {
-		const temps = this.sensors.filter((s) => s.type === "Temperature" && /^\/(intelcpu|amdcpu)\/\d+\//.test(s.id));
-		const pick = temps.find((s) => s.name === "CPU Package") ?? temps.find((s) => /^Core \((Tctl|Tdie)/.test(s.name));
-		return pick?.value != null && pick.value > 0 ? pick.value : null;
+		return this.online ? hardwareValues.cpuTemperature(this.sensors) : null;
 	}
 	launchOnce() {
 		if (this.launchTried || process.platform !== "win32") return;

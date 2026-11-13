@@ -10,7 +10,8 @@
   "main": "./out/main/index.js",
   "scripts": {
     "start": "electron .",
-    "check": "node --check out/main/index.js && node --check out/preload/index.js && node --check out/renderer/assets/index-CzIv0K4n.js"
+    "check": "node scripts/check.cjs",
+    "recover:fragments": "node scripts/recover-fragments.cjs"
   },
   "dependencies": {
     "systeminformation": "5.33.15"

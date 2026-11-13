@@ -1,6 +1,5 @@
 // GENERATED FRAGMENT — extracted from out/renderer/assets/index-CzIv0K4n.js, lines 18992-19015.
-// Original module marker: src/renderer/lib/hwText.ts. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// Original module marker: src/renderer/lib/hwText.ts. Not original TypeScript/TSX; not standalone.
 function uptimeText(sec) {
 	const d = Math.floor(sec / 86400);
 	const h = Math.floor(sec % 86400 / 3600);

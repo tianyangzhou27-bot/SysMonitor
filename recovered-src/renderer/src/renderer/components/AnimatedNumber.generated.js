@@ -1,6 +1,5 @@
 // GENERATED FRAGMENT — extracted from out/renderer/assets/index-CzIv0K4n.js, lines 24058-24098.
-// Original module marker: src/renderer/components/AnimatedNumber.tsx. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// Original module marker: src/renderer/components/AnimatedNumber.tsx. Not original TypeScript/TSX; not standalone.
 function AnimatedNumber({ value, decimals = 0, duration = 450 }) {
 	const ref = (0, import_react.useRef)(null);
 	const shown = (0, import_react.useRef)(null);

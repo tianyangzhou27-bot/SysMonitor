@@ -416,6 +416,8 @@ $null = $s.AddList('procPid', '\Process(*)\ID Process')
 $null = $s.Add('gpuEng', '\GPU Engine(*)\Utilization Percentage', $true)
 $null = $s.Add('gpuMem', '\GPU Adapter Memory(*)\Dedicated Usage', $true)
 $null = $s.Add('gpuShared', '\GPU Adapter Memory(*)\Shared Usage', $true)
+$null = $s.Add('procGpuMem', '\GPU Process Memory(*)\Dedicated Usage', $true)
+$null = $s.Add('procGpuShared', '\GPU Process Memory(*)\Shared Usage', $true)
 # Stutter diagnosis inputs.
 $null = $s.Add('diskLatR', '\PhysicalDisk(*)\Avg. Disk sec/Read', $true)
 $null = $s.Add('diskLatW', '\PhysicalDisk(*)\Avg. Disk sec/Write', $true)

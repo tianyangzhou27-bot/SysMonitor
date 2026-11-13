@@ -1,6 +1,5 @@
-// GENERATED FRAGMENT — extracted from out/main/index.js, lines 3420-3861.
-// Original module marker: src/main/history/store.ts. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// GENERATED FRAGMENT — extracted from out/main/index.js, lines 3452-3893.
+// Original module marker: src/main/history/store.ts. Not original TypeScript/TSX; not standalone.
 var RAW_STEP = 5e3;
 var MINUTE_STEP = 6e4;
 var HOUR = 36e5;

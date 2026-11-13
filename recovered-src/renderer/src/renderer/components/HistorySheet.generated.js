@@ -1,6 +1,5 @@
 // GENERATED FRAGMENT — extracted from out/renderer/assets/index-CzIv0K4n.js, lines 23540-24055.
-// Original module marker: src/renderer/components/HistorySheet.tsx. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// Original module marker: src/renderer/components/HistorySheet.tsx. Not original TypeScript/TSX; not standalone.
 var STORAGE_KEY = "sysmonitor.history.selected.v1";
 var DEFAULT_SELECTED = [
 	"cpu.usage",

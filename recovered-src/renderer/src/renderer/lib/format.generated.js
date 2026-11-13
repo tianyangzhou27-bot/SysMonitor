@@ -1,6 +1,5 @@
 // GENERATED FRAGMENT — extracted from out/renderer/assets/index-CzIv0K4n.js, lines 17689-17734.
-// Original module marker: src/renderer/lib/format.ts. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// Original module marker: src/renderer/lib/format.ts. Not original TypeScript/TSX; not standalone.
 var GB$2 = 1024 ** 3;
 function formatGB(bytes, digits = 1) {
 	return bytes == null ? "--" : (bytes / GB$2).toFixed(digits);

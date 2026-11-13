@@ -1,6 +1,5 @@
-// GENERATED FRAGMENT — extracted from out/main/index.js, lines 5408-5417.
-// Original module marker: src/shared/taskbar.ts. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// GENERATED FRAGMENT — extracted from out/main/index.js, lines 5451-5460.
+// Original module marker: src/shared/taskbar.ts. Not original TypeScript/TSX; not standalone.
 function taskbarMetrics(fontSize) {
 	const colW = Math.round(fontSize * 8.8);
 	const gap = Math.round(fontSize * 1.5);

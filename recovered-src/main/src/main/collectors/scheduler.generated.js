@@ -1,6 +1,5 @@
-// GENERATED FRAGMENT — extracted from out/main/index.js, lines 2945-3311.
-// Original module marker: src/main/collectors/scheduler.ts. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// GENERATED FRAGMENT — extracted from out/main/index.js, lines 2975-3343.
+// Original module marker: src/main/collectors/scheduler.ts. Not original TypeScript/TSX; not standalone.
 var clampPct = (v) => v == null ? null : Math.min(100, Math.max(0, v));
 var norm = (s) => s.toLowerCase().replace(/[^a-z0-9]/g, "");
 function speedOf(desc, map) {
@@ -158,7 +157,7 @@ var MetricsScheduler = class {
 	}
 	onFast(fast) {
 		const pkgMw = fast.energy?.["RAPL_Package0_PKG"];
-		this.latestCpuW = pkgMw != null ? pkgMw / 1e3 : null;
+		this.latestCpuW = hardwareValues.cpuPower(pkgMw, this.lhm.list(), this.lhm.isOnline());
 		const gpuW = this.gpuPower.watts ?? this.gpuSmi.latest?.powerW ?? null;
 		const power = computePower(this.latestCpuW, gpuW, this.otherWatts, this.wallSource);
 		this.latestPower = power;
@@ -298,6 +297,7 @@ var MetricsScheduler = class {
 		const snap = {
 			ts: raw.t,
 			lhmOnline: this.lhm.isOnline(),
+            temperatureSensors: this.lhm.list().filter(s => s.type === "Temperature").map(s => ({ id: s.id, hardware: s.hardware, name: s.name, value: s.value, unit: s.unit, label: this.coolingCfg.names[s.id] ?? null })),
 			frames: this.frames.update(this.framesCfg, this.shellState),
 			perf: this.buildPerf(raw),
 			diagnosis: {
@@ -362,6 +362,7 @@ var MetricsScheduler = class {
 				busyPercent: clampPct(raw.diskT["_Total"])
 			}
 		};
+		processMonitor.enrich(raw, snap);
 		for (const cb of this.enrichers) cb(snap);
 		this.latest = snap;
 		for (const win of electron.BrowserWindow.getAllWindows()) if (!win.isDestroyed()) win.webContents.send(IPC.metricsSnapshot, snap);

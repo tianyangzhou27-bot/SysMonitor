@@ -1,6 +1,5 @@
 // GENERATED FRAGMENT — extracted from out/renderer/assets/index-CzIv0K4n.js, lines 23301-23537.
-// Original module marker: src/renderer/components/HistoryChart.tsx. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// Original module marker: src/renderer/components/HistoryChart.tsx. Not original TypeScript/TSX; not standalone.
 var HEIGHT = 190;
 var SYNC_KEY = "sysmonitor-history";
 var EMPTY_SELECT = {

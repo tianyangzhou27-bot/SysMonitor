@@ -8,3 +8,11 @@ settings.json
 history.db*
 .DS_Store
 Thumbs.db
+telegram-*.json
+*.tmp
+*.dmp
+*.zip
+.env
+.env.*
+!*.example
+resources/processes/**/*.dll

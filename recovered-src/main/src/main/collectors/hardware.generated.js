@@ -1,6 +1,5 @@
-// GENERATED FRAGMENT — extracted from out/main/index.js, lines 850-1066.
-// Original module marker: src/main/collectors/hardware.ts. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// GENERATED FRAGMENT — extracted from out/main/index.js, lines 882-1098.
+// Original module marker: src/main/collectors/hardware.ts. Not original TypeScript/TSX; not standalone.
 var COMMAND = "[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;ConvertTo-Json -InputObject @(Get-CimInstance Win32_PhysicalMemory | Select-Object BankLabel,DeviceLocator,Capacity,Speed,ConfiguredClockSpeed,Manufacturer,PartNumber,SMBIOSMemoryType) -Compress";
 var DEVICES_COMMAND = [
 	"$ErrorActionPreference='SilentlyContinue'",

@@ -1,6 +1,5 @@
 // GENERATED FRAGMENT — extracted from out/renderer/assets/index-CzIv0K4n.js, lines 17626-17686.
-// Original module marker: src/renderer/components/Dashboard.tsx. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// Original module marker: src/renderer/components/Dashboard.tsx. Not original TypeScript/TSX; not standalone.
 var NO_DRAG = "button, summary, a, input, select, textarea, .seg, .mask, .react-resizable-handle";
 function Dashboard({ cards, ref }) {
 	const { width, containerRef, mounted } = useContainerWidth();

@@ -1,6 +1,5 @@
-// GENERATED FRAGMENT — extracted from out/renderer/assets/index-CzIv0K4n.js, lines 25675-25796.
-// Original module marker: src/renderer/components/AppLogo.tsx. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// GENERATED FRAGMENT — extracted from out/renderer/assets/index-CzIv0K4n.js, lines 25616-25737.
+// Original module marker: src/renderer/components/AppLogo.tsx. Not original TypeScript/TSX; not standalone.
 function AppLogo({ size = 20 }) {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", {
 		width: size,

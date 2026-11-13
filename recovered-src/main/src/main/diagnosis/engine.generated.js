@@ -1,6 +1,5 @@
-// GENERATED FRAGMENT — extracted from out/main/index.js, lines 4369-4482.
-// Original module marker: src/main/diagnosis/engine.ts. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// GENERATED FRAGMENT — extracted from out/main/index.js, lines 4401-4514.
+// Original module marker: src/main/diagnosis/engine.ts. Not original TypeScript/TSX; not standalone.
 var CLEAR_MS = 15e3;
 var RANK = {
 	low: 0,

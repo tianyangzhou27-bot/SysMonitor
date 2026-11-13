@@ -1,6 +1,5 @@
 // GENERATED FRAGMENT — extracted from out/renderer/assets/index-CzIv0K4n.js, lines 24184-24218.
-// Original module marker: src/renderer/components/MetricCard.tsx. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// Original module marker: src/renderer/components/MetricCard.tsx. Not original TypeScript/TSX; not standalone.
 function MetricCard({ icon: Icon, label, value, unit, decimals = 0, level, history, chartMax, sub, hint, animMs }) {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(GlassCard, {
 		className: `metric is-${level}`,

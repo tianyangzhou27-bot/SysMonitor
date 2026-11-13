@@ -1,12 +1,12 @@
-// GENERATED FRAGMENT — extracted from out/preload/index.js, lines 34-77.
-// Original module marker: src/preload/index.ts. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// GENERATED FRAGMENT — extracted from out/preload/index.js, lines 34-78.
+// Original module marker: src/preload/index.ts. Not original TypeScript/TSX; not standalone.
 function subscribe(channel, cb) {
 	const handler = (_, v) => cb(v);
 	electron.ipcRenderer.on(channel, handler);
 	return () => electron.ipcRenderer.removeListener(channel, handler);
 }
 electron.contextBridge.exposeInMainWorld("api", {
+ processes: { open: () => electron.ipcRenderer.send("process:open") },
 	win: {
 		minimize: () => electron.ipcRenderer.send(IPC.winMinimize),
 		toggleMaximize: () => electron.ipcRenderer.send(IPC.winToggleMaximize),
@@ -14,7 +14,7 @@ electron.contextBridge.exposeInMainWorld("api", {
 		isMaximized: () => electron.ipcRenderer.invoke(IPC.winIsMaximized),
 		onMaximizedChange: (cb) => subscribe(IPC.winMaximizedChanged, cb)
 	},
-	theme: { set: (mode) => electron.ipcRenderer.send(IPC.themeSet, mode) },
+	theme: { set: (mode) => electron.ipcRenderer.send(IPC.themeSet, mode), get: () => electron.ipcRenderer.invoke("theme:get"), onChange: (cb) => subscribe("theme:changed", cb) },
 	metrics: {
 		getLatest: () => electron.ipcRenderer.invoke(IPC.metricsGetLatest),
 		onSnapshot: (cb) => subscribe(IPC.metricsSnapshot, cb)

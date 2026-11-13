@@ -1,6 +1,5 @@
-// GENERATED FRAGMENT — extracted from out/main/index.js, lines 4978-5287.
-// Original module marker: src/main/settings.ts. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// GENERATED FRAGMENT — extracted from out/main/index.js, lines 5011-5322.
+// Original module marker: src/main/settings.ts. Not original TypeScript/TSX; not standalone.
 var DEFAULT_SETTINGS = {
 	refreshMs: 1e3,
 	powerRefreshMs: 200,
@@ -31,7 +30,8 @@ var DEFAULT_SETTINGS = {
 		diskUsage: 95,
 		power: 600,
 		netLatencyMs: 300,
-		procCpu: 50
+		procCpu: 50,
+        procMemory: 25
 	},
 	history: {
 		enabled: true,
@@ -169,7 +169,8 @@ function sanitize(raw, base) {
 			diskUsage: num(a.diskUsage, 50, 100, ba.diskUsage),
 			power: num(a.power, 50, 2e3, ba.power),
 			netLatencyMs: num(a.netLatencyMs, 20, 5e3, ba.netLatencyMs),
-			procCpu: num(a.procCpu, 5, 100, ba.procCpu)
+			procCpu: num(a.procCpu, 5, 100, ba.procCpu),
+            procMemory: num(a.procMemory, 5, 100, ba.procMemory ?? 25)
 		},
 		history: {
 			enabled: bool(h.enabled, bh.enabled),

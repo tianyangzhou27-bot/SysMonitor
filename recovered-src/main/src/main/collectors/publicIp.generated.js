@@ -1,6 +1,5 @@
-// GENERATED FRAGMENT — extracted from out/main/index.js, lines 2004-2063.
-// Original module marker: src/main/collectors/publicIp.ts. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// GENERATED FRAGMENT — extracted from out/main/index.js, lines 2034-2093.
+// Original module marker: src/main/collectors/publicIp.ts. Not original TypeScript/TSX; not standalone.
 var IPV4 = /\b(?:\d{1,3}\.){3}\d{1,3}\b/;
 var TIMEOUT_MS = 6e3;
 function nodeGet(url) {

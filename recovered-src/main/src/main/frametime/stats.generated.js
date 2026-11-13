@@ -1,6 +1,5 @@
-// GENERATED FRAGMENT — extracted from out/main/index.js, lines 1440-1548.
-// Original module marker: src/main/frametime/stats.ts. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// GENERATED FRAGMENT — extracted from out/main/index.js, lines 1470-1578.
+// Original module marker: src/main/frametime/stats.ts. Not original TypeScript/TSX; not standalone.
 var WINDOW_MS = 6e4;
 var STUTTER_WINDOW_MS = 1e4;
 var OTHER_MS = 5e3;

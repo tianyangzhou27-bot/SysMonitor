@@ -1,6 +1,5 @@
-// GENERATED FRAGMENT — extracted from out/main/index.js, lines 441-649.
-// Original module marker: src/main/collectors/gpuSmi.ts. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// GENERATED FRAGMENT — extracted from out/main/index.js, lines 473-681.
+// Original module marker: src/main/collectors/gpuSmi.ts. Not original TypeScript/TSX; not standalone.
 var MIB = 1048576;
 function num$3(s) {
 	if (s == null) return null;

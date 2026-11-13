@@ -24500,90 +24500,31 @@ function valueText(row, tab, source) {
 	return `${row.netConns ?? 0} 个连接`;
 }
 function ProcessCard({ data }) {
-	const [tab, setTab] = (0, import_react.useState)("cpu");
-	const [merged, setMerged] = (0, import_react.useState)(true);
-	const lists = data ? merged ? data.apps : data.procs : null;
-	const source = data?.netSource ?? "clash";
-	const rows = lists?.[tab] ?? [];
-	const max = Math.max(1e-9, ...rows.map((r) => weight(r, tab, source)));
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(GlassCard, {
-		className: "panel proc",
-		children: [
-			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "panel__head",
-				children: [
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ListOrdered, {
-						size: 18,
-						strokeWidth: 1.75
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "进程 Top 10" }),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "seg seg--right",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
-							className: merged ? "is-on" : "",
-							onClick: () => setMerged(true),
-							children: "按应用"
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
-							className: merged ? "" : "is-on",
-							onClick: () => setMerged(false),
-							children: "按进程"
-						})]
-					})
-				]
-			}),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-				className: "seg seg--full",
-				children: TABS.map((t) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
-					className: tab === t.key ? "is-on" : "",
-					onClick: () => setTab(t.key),
-					children: t.label
-				}, t.key))
-			}),
-			tab === "net" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-				className: "proc__note",
-				children: source === "clash" ? "统计经 Clash 的流量，按发起连接的应用归属；不经过 Clash 的流量（局域网等）不在内" : "Clash 控制器未连接，暂以已建立的 TCP 连接数排序"
-			}),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("ol", {
-				className: "proc__list",
-				children: [
-					rows.map((r, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", {
-						className: "proc__row",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-							className: "proc__rank",
-							children: i + 1
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "proc__main",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "proc__line",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-									className: "proc__name",
-									children: [
-										r.name,
-										merged && r.count > 1 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("em", { children: [" ×", r.count] }),
-										!merged && r.pid != null && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("em", { children: [" · PID ", r.pid] })
-									]
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "proc__val",
-									children: valueText(r, tab, source)
-								})]
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								className: "proc__bar",
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: { width: `${weight(r, tab, source) / max * 100}%` } })
-							})]
-						})]
-					}, `${r.name}-${r.pid ?? i}`)),
-					data && rows.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-						className: "panel__hint",
-						children: tab === "net" ? "当前没有明显的流量" : "--"
-					}),
-					!data && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-						className: "panel__hint",
-						children: "读取中…"
-					})
-				]
-			})
-		]
-	});
+  const h = import_react.createElement;
+  const [tab,setTab]=import_react.useState('cpu');
+  const [merged,setMerged]=import_react.useState(false);
+  const tabs=[['cpu','CPU'],['mem','内存'],['gpu','GPU'],['vram','显存'],['net','网络'],['io','I/O']];
+  const rows=(merged?data?.apps:data?.procs)?.[tab]||[];
+  const n=(x,suffix='')=>typeof x==='number'&&Number.isFinite(x)?x.toFixed(1)+suffix:'--';
+  const bytes=x=>x==null?'--':n(x/1048576,' MB');
+  const rate=x=>x==null?'--':x>=1048576?n(x/1048576,' MB/s'):n(x/1024,' KB/s');
+  const value=r=>tab==='cpu'?n(r.cpuPercent,'%'):tab==='mem'?bytes(r.memBytes):tab==='gpu'?n(r.gpuPercent,'%')+(r.gpuEngine?' '+r.gpuEngine:''):tab==='vram'?bytes(r.gpuMemoryBytes):tab==='io'?rate(r.ioBytesPerSec):'↓'+rate(r.netDownBytesPerSec)+' ↑'+rate(r.netUpBytesPerSec);
+  const open=()=>window.api.processes.open();
+  const items=rows.map((r,i)=>{
+    const name=h('span',{className:'proc__name',title:r.name},r.name,h('em',null,merged?' ×'+r.count:' · PID '+r.pid));
+    const line=h('div',{className:'proc__line'},name,h('span',{className:'proc__val'},value(r)));
+    return h('li',{className:'proc__row',key:r.pid||r.name},h('span',{className:'proc__rank'},i+1),h('div',{className:'proc__main'},line));
+  });
+  return h(GlassCard,{className:'panel proc'},
+    h('div',{className:'panel__head'},h('span',null,'进程 Top 10'),h('button',{className:'seg seg--right',onClick:open,title:'查看完整列表、搜索、详情和进程操作'},'管理 / 搜索')),
+    h('div',{className:'seg seg--full'},tabs.map(([key,label])=>h('button',{key,className:tab===key?'is-on':'',onClick:()=>setTab(key)},label))),
+    h('div',{className:'seg',style:{marginTop:8}},h('button',{className:!merged?'is-on':'',onClick:()=>setMerged(false)},'按进程'),h('button',{className:merged?'is-on':'',onClick:()=>setMerged(true)},'按应用')),
+    tab==='net'?h('p',{className:'proc__note'},data?.netSource==='etw'?'Windows ETW 按 PID 采集 TCP/UDP；代理与回环流量不可重复相加。':data?.netError||'等待系统级网络采集'):null,
+    tab==='io'?h('p',{className:'proc__note'},'包括文件、网络和设备 I/O，不等于纯磁盘读写。'):null,
+    tab==='gpu'&&merged?h('p',{className:'proc__note'},'应用组显示其中最忙进程的 GPU 占用，不相加。'):null,
+    h('ol',{className:'proc__list'},items),
+    !rows.length?h('p',{className:'panel__hint'},'等待进程采集…'):null
+  );
 }
 //#endregion
 //#region src/renderer/components/ProxyCard.tsx
@@ -25963,8 +25904,10 @@ var ORDER = [
 	"dark"
 ];
 function readStored() {
+	try {
 	const v = localStorage.getItem(KEY);
 	return v === "light" || v === "dark" || v === "system" ? v : "system";
+	} catch { return "system"; }
 }
 function useTheme() {
 	const [mode, setMode] = (0, import_react.useState)(readStored);
@@ -25974,17 +25917,32 @@ function useTheme() {
 			const resolved = mode === "system" ? mq.matches ? "dark" : "light" : mode;
 			document.documentElement.dataset.theme = resolved;
 		};
+		let active = true;
+		const nativeApply = (state) => {
+			if (active && state.mode === mode) document.documentElement.dataset.theme = state.resolved;
+		};
+		const unsubscribe = window.api.theme.onChange(nativeApply);
 		apply();
 		window.api.theme.set(mode);
+		window.api.theme.get().then(nativeApply).catch(() => {});
+		const refresh = () => { apply(); window.api.theme.get().then(nativeApply).catch(() => {}); };
 		mq.addEventListener("change", apply);
-		return () => mq.removeEventListener("change", apply);
+		window.addEventListener("focus", refresh);
+		document.addEventListener("visibilitychange", refresh);
+		return () => {
+			active = false;
+			unsubscribe();
+			mq.removeEventListener("change", apply);
+			window.removeEventListener("focus", refresh);
+			document.removeEventListener("visibilitychange", refresh);
+		};
 	}, [mode]);
 	return {
 		mode,
 		cycle: (0, import_react.useCallback)(() => {
 			setMode((m) => {
 				const next = ORDER[(ORDER.indexOf(m) + 1) % ORDER.length];
-				localStorage.setItem(KEY, next);
+				try { localStorage.setItem(KEY, next); } catch {}
 				return next;
 			});
 		}, [])

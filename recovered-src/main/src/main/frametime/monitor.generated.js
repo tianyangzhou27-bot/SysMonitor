@@ -1,6 +1,5 @@
-// GENERATED FRAGMENT — extracted from out/main/index.js, lines 1551-1731.
-// Original module marker: src/main/frametime/monitor.ts. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// GENERATED FRAGMENT — extracted from out/main/index.js, lines 1581-1761.
+// Original module marker: src/main/frametime/monitor.ts. Not original TypeScript/TSX; not standalone.
 var START_DELAY_MS = 3e3;
 var STOP_DELAY_MS = 15e3;
 var RETRY_DENIED_MS = 6e4;

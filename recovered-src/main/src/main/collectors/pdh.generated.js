@@ -1,6 +1,5 @@
-// GENERATED FRAGMENT — extracted from out/main/index.js, lines 2223-2304.
-// Original module marker: src/main/collectors/pdh.ts. Not the original TypeScript/TSX source.
-// Depends on bundle-level imports, globals, and other fragments; not standalone.
+// GENERATED FRAGMENT — extracted from out/main/index.js, lines 2253-2334.
+// Original module marker: src/main/collectors/pdh.ts. Not original TypeScript/TSX; not standalone.
 function scriptPath() {
 	return electron.app.isPackaged ? (0, path.join)(process.resourcesPath, "pdh-sampler.ps1") : (0, path.join)(electron.app.getAppPath(), "resources", "pdh-sampler.ps1");
 }
