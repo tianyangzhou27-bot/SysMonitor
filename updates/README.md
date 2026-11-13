@@ -10,6 +10,7 @@ Future releases belong on the Releases page with a version, date, bilingual note
 
 | 版本 / Release | 说明 / Notes |
 | --- | --- |
+| 源码还原 / Source reconstruction | [2026-11-13 source recovery](2026-11-13-source-recovery.md) |
 | `v0.1.0-20261113.1` | [2026-11-13](2026-11-13.md) |
 
 ## 更新步骤 / Update steps

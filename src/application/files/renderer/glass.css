@@ -1,0 +1,90 @@
+/* Shared glass composition: works without Windows desktop-backdrop APIs. */
+:root, :root[data-theme='dark'] {
+  --text: #f2f5ff;
+  --text-dim: #b4bfd4;
+  --glass-bg: rgba(47, 55, 73, .56);
+  --glass-border: rgba(204, 222, 255, .15);
+  --glass-hi: rgba(234, 245, 255, .18);
+  --glass-glow: rgba(157, 194, 255, .25);
+  --glass-shadow: 0 12px 32px rgba(3, 9, 25, .22);
+  --scene-base: rgba(16, 22, 37, .92);
+  --scene-a: rgba(70, 116, 192, .36);
+  --scene-b: rgba(135, 87, 167, .23);
+  --scene-c: rgba(53, 154, 169, .22);
+  --sheet-bg: rgba(23, 31, 48, .96);
+  --sheet-card: #253149;
+  --sheet-ctl: #34425b;
+  --sheet-ctl-on: #465a79;
+  --sheet-ctl-off: #46516a;
+  --sheet-line: #43516a;
+}
+:root[data-theme='light'] {
+  --text: #172740;
+  --text-dim: #52647d;
+  --glass-bg: rgba(255, 255, 255, .54);
+  --glass-border: rgba(255, 255, 255, .55);
+  --glass-hi: rgba(255, 255, 255, .38);
+  --glass-glow: rgba(255, 255, 255, .8);
+  --glass-shadow: 0 12px 32px rgba(60, 88, 140, .11);
+  --scene-base: rgba(234, 241, 252, .94);
+  --scene-a: rgba(117, 172, 245, .38);
+  --scene-b: rgba(201, 164, 225, .28);
+  --scene-c: rgba(119, 214, 213, .32);
+  --sheet-bg: rgba(239, 245, 253, .96);
+  --sheet-card: #f9fbff;
+  --sheet-ctl: #dce6f4;
+  --sheet-ctl-on: #ffffff;
+  --sheet-ctl-off: #bdcce0;
+  --sheet-line: #ccd9e9;
+  --ok: #18754b;
+  --warn: #975608;
+  --danger: #bc343e;
+}
+.app {
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse at 4% 6%, var(--scene-a), transparent 58%),
+    radial-gradient(ellipse at 97% 36%, var(--scene-b), transparent 62%),
+    radial-gradient(ellipse at 48% 110%, var(--scene-c), transparent 62%),
+    var(--scene-base);
+}
+.titlebar { background: color-mix(in srgb, var(--glass-bg) 72%, transparent); border-bottom: 1px solid var(--glass-border); }
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(42px) saturate(115%);
+  -webkit-backdrop-filter: blur(42px) saturate(115%);
+  box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-hi);
+}
+.glass:hover { transform: none; border-color: var(--glass-hi); }
+.glass::before {
+  background: url('./frost-grain.svg') repeat;
+  background-size: 160px 160px;
+  opacity: .19;
+  mix-blend-mode: soft-light;
+}
+.glass::after, .glass:hover::after { opacity: 0; }
+.app::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: url('./frost-grain.svg') repeat;
+  opacity: .085;
+  mix-blend-mode: soft-light;
+}
+.sheet { backdrop-filter: blur(28px) saturate(130%); border-top: 1px solid var(--glass-border); border-radius: 24px 24px 0 0; }
+.sgroup { border: 1px solid var(--glass-border); box-shadow: inset 0 1px 0 color-mix(in srgb, var(--glass-hi) 30%, transparent); }
+button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid #3984ef; outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .app { background: var(--sheet-card); }
+  .glass, .sheet { background: var(--sheet-bg); backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .app::before, .glass::before, .glass::after { display: none; }
+}
+@media (forced-colors: active) {
+  .app, .glass, .sheet, .titlebar, .sgroup { background: Canvas; color: CanvasText; box-shadow: none; backdrop-filter: none; border-color: CanvasText; }
+  .app::before, .glass::before, .glass::after { display: none; }
+}

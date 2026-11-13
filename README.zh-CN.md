@@ -2,6 +2,8 @@
 
 简体中文 | [English](README.md)
 
+**逆向还原源码已提供：**[可编辑 JavaScript 与 C# 工程](src/README.md)。C# 助手已重新编译成功；JavaScript 构建可逐字节生成全部 21 个运行文件。构建命令与验证边界见源码说明。
+
 **[下载 Windows 程序](https://github.com/tianyangzhou27-bot/SysMonitor/releases) · [使用说明](docs/USER_GUIDE.zh-CN.md) · [更新专区](updates/README.md) · [隐私说明](docs/PERMISSIONS_AND_PRIVACY.zh-CN.md)**
 
 当前快照：`v0.1.0-20261113.1`（2026-11-13），包含进程管理、温度显示、Telegram 报警与恢复通知、远程状态查询和告警设置。设置和历史记录保存在本机。**可选 Telegram 功能会将相关监控信息发送到 Telegram；公网 IP 与连通性检测也会联网。** 本程序不是严格离线软件。
@@ -70,7 +72,7 @@ Add-LocalGroupMember -SID S-1-5-32-559 -Member "$env:USERDOMAIN\$env:USERNAME"
 | --- | --- |
 | `out/main/`、`out/preload/`、`out/renderer/` | 从 Electron 包中提取的应用构建代码 |
 | `resources/` | PowerShell 硬件及网络脚本、图标 |
-| `resources/processes/` | 进程采集助手、依赖与许可证；C# 原始源码尚未找回 |
+| `resources/processes/` | 进程采集助手、依赖与许可证；反编译 C# 源码位于 `src/collector/` |
 | `updates/` | 独立更新下载入口及双语版本说明 |
 | `tools/` | 历史 ASAR 补丁脚本；当前版本无需执行，不能重复套用 |
 | `vendor/PresentMon/` | Intel PresentMon 程序和许可证 |
@@ -83,4 +85,4 @@ Add-LocalGroupMember -SID S-1-5-32-559 -Member "$env:USERDOMAIN\$env:USERNAME"
 
 本仓库的 SysMonitor 应用代码按 [MIT License](LICENSE) 开源。打包进来的第三方软件保留各自版权及许可证，见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。如果要继续开发，最好找回原始工程；当前提取版不包含原始源码结构。
 
-提供的文件中未找到 `SysMonitor-Processes.exe` 对应的 C# 源码，目前随附其二进制以保持功能可用。因此本次发布不宣称所有组件均具备完整源码或可复现构建；可运行 JavaScript 与还原片段已公开供审阅和修改。
+原作者的 TypeScript/React 工程未随程序提供。目前已在 `src/` 中提供可构建的还原工程，包括反编译后的 C# 采集器。JavaScript 仍保留部分生成变量名和编译后的 React 调用；区域模块按原顺序共享作用域。这里发布的是还原源码，不声称原始类型、注释和变量名全部原样恢复。

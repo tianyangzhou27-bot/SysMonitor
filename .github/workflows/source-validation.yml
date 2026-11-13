@@ -1,0 +1,45 @@
+name: Validate recovered source
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - src/**
+      - scripts/build-js.cjs
+      - scripts/build-collector.ps1
+      - scripts/test-collector.cjs
+      - .github/workflows/source-validation.yml
+permissions:
+  contents: read
+jobs:
+  build-and-compare:
+    runs-on: windows-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out exact source commit
+        shell: pwsh
+        run: |
+          git -c core.autocrlf=false init .
+          git config core.autocrlf false
+          git remote add origin "https://github.com/$env:GITHUB_REPOSITORY.git"
+          git fetch --depth 1 origin $env:GITHUB_SHA
+          git checkout --detach FETCH_HEAD
+          if ($LASTEXITCODE) { throw 'Checkout failed' }
+      - name: Verify recovered JavaScript matches published runtime
+        shell: pwsh
+        run: |
+          node scripts/build-js.cjs --check
+          if ($LASTEXITCODE) { throw 'Recovered JavaScript differs from runtime' }
+          node scripts/build-js.cjs
+          node scripts/check.cjs
+          if ($LASTEXITCODE) { throw 'JavaScript syntax check failed' }
+      - name: Restore dependencies and compile recovered CSharp
+        shell: pwsh
+        run: |
+          ./scripts/restore-process-dependencies.ps1
+          ./scripts/build-collector.ps1
+      - name: Compare original and rebuilt collector behavior
+        shell: pwsh
+        run: |
+          node scripts/test-collector.cjs
+          if ($LASTEXITCODE) { throw 'Collector behavior checks failed' }

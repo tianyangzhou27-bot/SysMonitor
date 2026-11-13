@@ -1,3 +1,5 @@
+**Superseded for development / 开发请使用新版还原工程：** [`src/`](../src/README.md) now includes the complete JavaScript assembly recipe and buildable C# collector. This directory remains the earlier reading-only fragments. / 新版 `src/` 包含完整 JavaScript 构建清单与可编译 C#；本目录保留早期只读参考片段。
+
 # Recovered JavaScript fragments / 还原的 JavaScript 片段
 
 These 83 files were mechanically separated from the three committed `out/` bundles at their `//#region src/...` markers. `INDEX.json` maps each fragment to its original marker and exact line range in the bundle. The extraction changes no application logic.

@@ -11,7 +11,12 @@
   "scripts": {
     "start": "electron .",
     "check": "node scripts/check.cjs",
-    "recover:fragments": "node scripts/recover-fragments.cjs"
+    "recover:fragments": "node scripts/recover-fragments.cjs",
+    "build:js": "node scripts/build-js.cjs",
+    "build:collector": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/build-collector.ps1",
+    "build": "npm run build:js && npm run build:collector",
+    "check:source": "node scripts/build-js.cjs --check",
+    "test:collector": "node scripts/test-collector.cjs"
   },
   "dependencies": {
     "systeminformation": "5.33.15"

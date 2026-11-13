@@ -2,6 +2,8 @@
 
 [简体中文](README.zh-CN.md) | English
 
+**Recovered source is now available:** [Editable JavaScript and decompiled C# project](src/README.md). The C# helper compiles successfully; the JavaScript build reproduces all 21 runtime files byte-for-byte. See the source guide for commands and validation limits.
+
 **[Download Windows app](https://github.com/tianyangzhou27-bot/SysMonitor/releases) · [User guide](docs/USER_GUIDE.md) · [Updates](updates/README.md) · [Privacy](docs/PERMISSIONS_AND_PRIVACY.md)**
 
 Current snapshot: `v0.1.0-20261113.1` (2026-11-13). Includes process management, temperature views, Telegram alerts, recovery notifications, remote status queries, and alert settings. Settings and history are stored locally. **Optional Telegram features send selected monitoring information to Telegram; public-IP/connectivity checks also access the network.** This is not a strictly offline application.
@@ -70,7 +72,7 @@ The app contacts external endpoints for public IP/connectivity checks and only r
 | --- | --- |
 | `out/main/`, `out/preload/`, `out/renderer/` | Extracted Electron application build |
 | `resources/` | PowerShell hardware/network helpers and icon |
-| `resources/processes/` | Process collector executable, dependencies, and bundled license notices; original C# source not yet recovered |
+| `resources/processes/` | Process collector executable, dependencies, and bundled license notices; decompiled C# is available under `src/collector/` |
 | `updates/` | Bilingual release notes and the dedicated download/update entry |
 | `tools/` | Historical ASAR patch scripts; not required to start the current app and not intended to be reapplied to it |
 | `vendor/PresentMon/` | Intel PresentMon binary and its license |
@@ -83,4 +85,4 @@ The memory spoofing script found beside the supplied application was excluded: i
 
 The SysMonitor application code in this repository is offered under the [MIT License](LICENSE). Bundled third-party software retains its own copyrights and licenses; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). The extracted build may not be suitable for further development until the original source project is recovered.
 
-The original C# source for `SysMonitor-Processes.exe` was not found in the supplied files. Its binary is included for functionality, so this publication does **not** claim complete source coverage or reproducible builds for every component. The runnable JavaScript and recovered fragments are available for inspection and modification.
+The originally authored TypeScript/React project was not supplied. A buildable reconstruction is now provided under `src/`, including the decompiled C# helper. JavaScript retains generated identifiers and compiled React calls; source regions are assembled in their original shared scope. This is reconstructed source, not a claim to have recovered every original type, comment, or variable name.

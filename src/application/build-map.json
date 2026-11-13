@@ -1,0 +1,284 @@
+[
+  {
+    "output": "main/appearance.js",
+    "inputs": [
+      "files/main/appearance.js"
+    ]
+  },
+  {
+    "output": "main/hardware-values.js",
+    "inputs": [
+      "files/main/hardware-values.js"
+    ]
+  },
+  {
+    "output": "main/index.js",
+    "inputs": [
+      "main/vendor/000.js",
+      "main/scaffold/1.js",
+      "main/modules/shared/ipc-channels.js",
+      "main/modules/shared/cooling.js",
+      "main/modules/shared/nvme.js",
+      "main/modules/main/alerts.js",
+      "main/modules/main/collectors/cpuInfo.js",
+      "main/modules/main/collectors/disk.js",
+      "main/modules/main/collectors/gpuSmi.js",
+      "main/modules/main/collectors/exec.js",
+      "main/modules/main/collectors/gpuInfo.js",
+      "main/modules/main/collectors/hardware.js",
+      "main/modules/main/collectors/lhm.js",
+      "main/modules/main/cooling/controller.js",
+      "main/modules/main/frametime/stats.js",
+      "main/modules/main/frametime/monitor.js",
+      "main/modules/main/cooling/model.js",
+      "main/modules/main/collectors/storage.js",
+      "main/modules/main/collectors/publicIp.js",
+      "main/modules/main/collectors/network.js",
+      "main/modules/main/collectors/pdh.js",
+      "main/modules/main/collectors/power.js",
+      "main/modules/main/collectors/clash.js",
+      "main/modules/main/collectors/processes.js",
+      "main/modules/main/collectors/proxy.js",
+      "main/modules/main/collectors/quality.js",
+      "main/modules/main/collectors/tunnels.js",
+      "main/modules/main/collectors/scheduler.js",
+      "main/modules/main/history/metrics.js",
+      "main/modules/main/history/store.js",
+      "main/modules/main/diagnosis/rules.js",
+      "main/modules/main/diagnosis/engine.js",
+      "main/modules/main/icon.js",
+      "main/modules/main/collectors/speedtest.js",
+      "main/modules/main/cooling/identify.js",
+      "main/modules/main/ipc.js",
+      "main/modules/main/settings.js",
+      "main/modules/main/tray.js",
+      "main/modules/main/windows/mainWindow.js",
+      "main/modules/shared/taskbar.js",
+      "main/modules/main/windows/taskbarWindow.js",
+      "main/modules/main/index.js"
+    ]
+  },
+  {
+    "output": "main/process-manager.html",
+    "inputs": [
+      "files/main/process-manager.html"
+    ]
+  },
+  {
+    "output": "main/process-manager.js",
+    "inputs": [
+      "files/main/process-manager.js"
+    ]
+  },
+  {
+    "output": "main/process-metrics.js",
+    "inputs": [
+      "files/main/process-metrics.js"
+    ]
+  },
+  {
+    "output": "main/process-monitor.js",
+    "inputs": [
+      "files/main/process-monitor.js"
+    ]
+  },
+  {
+    "output": "main/process-preload.js",
+    "inputs": [
+      "files/main/process-preload.js"
+    ]
+  },
+  {
+    "output": "main/shutdown.js",
+    "inputs": [
+      "files/main/shutdown.js"
+    ]
+  },
+  {
+    "output": "main/telegram-preload.js",
+    "inputs": [
+      "files/main/telegram-preload.js"
+    ]
+  },
+  {
+    "output": "main/telegram-report.js",
+    "inputs": [
+      "files/main/telegram-report.js"
+    ]
+  },
+  {
+    "output": "main/telegram-ui.js",
+    "inputs": [
+      "files/main/telegram-ui.js"
+    ]
+  },
+  {
+    "output": "main/telegram.html",
+    "inputs": [
+      "files/main/telegram.html"
+    ]
+  },
+  {
+    "output": "main/telegram.js",
+    "inputs": [
+      "files/main/telegram.js"
+    ]
+  },
+  {
+    "output": "preload/index.js",
+    "inputs": [
+      "preload/scaffold/0.js",
+      "preload/modules/shared/ipc-channels.js",
+      "preload/modules/preload/index.js"
+    ]
+  },
+  {
+    "output": "renderer/appearance-init.js",
+    "inputs": [
+      "files/renderer/appearance-init.js"
+    ]
+  },
+  {
+    "output": "renderer/assets/index-CzIv0K4n.js",
+    "inputs": [
+      "renderer/vendor/000.js",
+      "renderer/vendor/001.js",
+      "renderer/vendor/002.js",
+      "renderer/vendor/003.js",
+      "renderer/vendor/004.js",
+      "renderer/vendor/005.js",
+      "renderer/vendor/006.js",
+      "renderer/vendor/007.js",
+      "renderer/vendor/008.js",
+      "renderer/vendor/009.js",
+      "renderer/vendor/010.js",
+      "renderer/vendor/011.js",
+      "renderer/vendor/012.js",
+      "renderer/vendor/013.js",
+      "renderer/vendor/014.js",
+      "renderer/vendor/015.js",
+      "renderer/vendor/016.js",
+      "renderer/vendor/017.js",
+      "renderer/vendor/018.js",
+      "renderer/vendor/019.js",
+      "renderer/vendor/020.js",
+      "renderer/vendor/021.js",
+      "renderer/vendor/022.js",
+      "renderer/vendor/023.js",
+      "renderer/vendor/024.js",
+      "renderer/vendor/025.js",
+      "renderer/vendor/026.js",
+      "renderer/vendor/027.js",
+      "renderer/vendor/028.js",
+      "renderer/vendor/029.js",
+      "renderer/vendor/030.js",
+      "renderer/vendor/031.js",
+      "renderer/vendor/032.js",
+      "renderer/vendor/033.js",
+      "renderer/vendor/034.js",
+      "renderer/vendor/035.js",
+      "renderer/vendor/036.js",
+      "renderer/vendor/037.js",
+      "renderer/vendor/038.js",
+      "renderer/vendor/039.js",
+      "renderer/vendor/040.js",
+      "renderer/vendor/041.js",
+      "renderer/vendor/042.js",
+      "renderer/vendor/043.js",
+      "renderer/vendor/044.js",
+      "renderer/vendor/045.js",
+      "renderer/vendor/046.js",
+      "renderer/vendor/047.js",
+      "renderer/vendor/048.js",
+      "renderer/vendor/049.js",
+      "renderer/vendor/050.js",
+      "renderer/vendor/051.js",
+      "renderer/vendor/052.js",
+      "renderer/vendor/053.js",
+      "renderer/vendor/054.js",
+      "renderer/vendor/055.js",
+      "renderer/vendor/056.js",
+      "renderer/vendor/057.js",
+      "renderer/vendor/058.js",
+      "renderer/vendor/059.js",
+      "renderer/vendor/060.js",
+      "renderer/vendor/061.js",
+      "renderer/vendor/062.js",
+      "renderer/vendor/063.js",
+      "renderer/vendor/064.js",
+      "renderer/vendor/065.js",
+      "renderer/vendor/066.js",
+      "renderer/vendor/067.js",
+      "renderer/vendor/068.js",
+      "renderer/vendor/069.js",
+      "renderer/vendor/070.js",
+      "renderer/vendor/071.js",
+      "renderer/modules/renderer/lib/layout.js",
+      "renderer/modules/renderer/components/Dashboard.js",
+      "renderer/modules/renderer/lib/format.js",
+      "renderer/modules/renderer/lib/status.js",
+      "renderer/modules/renderer/components/GlassCard.js",
+      "renderer/modules/renderer/components/DiskPanel.js",
+      "renderer/modules/shared/cooling.js",
+      "renderer/modules/renderer/components/CoolingCard.js",
+      "renderer/modules/renderer/lib/diag.js",
+      "renderer/modules/renderer/lib/historyFormat.js",
+      "renderer/modules/renderer/components/DiagCard.js",
+      "renderer/modules/renderer/components/DiagSheet.js",
+      "renderer/modules/renderer/components/controls.js",
+      "renderer/modules/renderer/components/CoolingSheet.js",
+      "renderer/modules/renderer/lib/hwText.js",
+      "renderer/modules/renderer/components/HardwareCard.js",
+      "renderer/modules/shared/nvme.js",
+      "renderer/modules/renderer/components/HardwareSheet.js",
+      "renderer/vendor/072.js",
+      "renderer/modules/renderer/components/HistoryChart.js",
+      "renderer/modules/renderer/components/HistorySheet.js",
+      "renderer/modules/renderer/components/AnimatedNumber.js",
+      "renderer/modules/renderer/components/Sparkline.js",
+      "renderer/modules/renderer/components/StatusBadge.js",
+      "renderer/modules/renderer/components/MetricCard.js",
+      "renderer/modules/renderer/components/NetworkCard.js",
+      "renderer/modules/renderer/hooks/usePowerLive.js",
+      "renderer/modules/renderer/components/PowerCard.js",
+      "renderer/modules/renderer/components/ProcessCard.js",
+      "renderer/modules/renderer/components/ProxyCard.js",
+      "renderer/modules/renderer/components/QualityCard.js",
+      "renderer/modules/renderer/components/SettingsSheet.js",
+      "renderer/modules/renderer/components/SpeedTestCard.js",
+      "renderer/modules/renderer/components/AppLogo.js",
+      "renderer/modules/renderer/components/TitleBar.js",
+      "renderer/modules/renderer/hooks/useMetrics.js",
+      "renderer/modules/renderer/hooks/useSettings.js",
+      "renderer/modules/renderer/hooks/useTheme.js",
+      "renderer/modules/renderer/App.js",
+      "renderer/modules/shared/taskbar.js",
+      "renderer/modules/renderer/components/TaskbarApp.js",
+      "renderer/modules/renderer/main.js"
+    ]
+  },
+  {
+    "output": "renderer/assets/index-Ehwz5P75.css",
+    "inputs": [
+      "files/renderer/assets/index-Ehwz5P75.css"
+    ]
+  },
+  {
+    "output": "renderer/frost-grain.svg",
+    "inputs": [
+      "files/renderer/frost-grain.svg"
+    ]
+  },
+  {
+    "output": "renderer/glass.css",
+    "inputs": [
+      "files/renderer/glass.css"
+    ]
+  },
+  {
+    "output": "renderer/index.html",
+    "inputs": [
+      "files/renderer/index.html"
+    ]
+  }
+]

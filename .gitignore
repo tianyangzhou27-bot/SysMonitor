@@ -16,3 +16,5 @@ telegram-*.json
 .env.*
 !*.example
 resources/processes/**/*.dll
+src/collector/bin/
+src/collector/obj/

@@ -1,0 +1,22 @@
+{
+  "recoveredAt": "2026-11-13",
+  "decompiler": "ILSpyCmd 11.2.0.10050",
+  "language": "CSharp5",
+  "targetFramework": ".NET Framework 4.8",
+  "originalCollectorSha256": "921971ff2c2331c8ef1a82caab5b0b871fb457004b63d8aef7a0cc2af8074a06",
+  "originalAsarSha256": "799665a853e31e8e1230696acff26a1e939f0bdec08ae49603b8b7567414d8f6",
+  "javascriptBaselineCommit": "c68a8ed38ce77092c4ce9b209cc6a87bb7c8c454",
+  "baselineAdjustments": [
+    "Repository source-mode process-helper path fix already present in baseline"
+  ],
+  "validation": [
+    "21 runtime files reconstructed byte-for-byte",
+    "C# compiled with Windows Framework64 csc",
+    "Original and rebuilt collector protocol/details/stale-identity/sampling/owned-child-termination checks passed"
+  ],
+  "notRecovered": [
+    "Original TypeScript/TSX types and JSX syntax",
+    "Original build tool configuration and all source comments",
+    "All original local variable names"
+  ]
+}
