@@ -2141,6 +2141,12 @@ var NetworkCollector = class {
 		updatedAt: null
 	};
 	timers = [];
+	policy = { localOnly: false, publicIp: true, internetProbe: true };
+	setPolicy(policy) {
+		this.policy = policy;
+		if (policy.localOnly || !policy.publicIp) this.publicIp = { domestic: null, overseas: null, overseasLoc: null, updatedAt: null };
+		if (policy.localOnly || !policy.internetProbe) { this.internetLatencyMs = null; this.reach = null; }
+	}
 	stopped = true;
 	busy = {
 		info: false,
@@ -2212,10 +2218,11 @@ var NetworkCollector = class {
 	probe() {
 		return this.guarded("probe", async () => {
 			const gw = this.primaryGateway;
-			const [gwMs, netMs] = await Promise.all([gw ? pingLatency(gw) : Promise.resolve(null), tcpLatency(INTERNET_PROBE.host, INTERNET_PROBE.port)]);
+			const allowInternet = !this.policy.localOnly && this.policy.internetProbe;
+			const [gwMs, netMs] = await Promise.all([gw ? pingLatency(gw) : Promise.resolve(null), allowInternet ? tcpLatency(INTERNET_PROBE.host, INTERNET_PROBE.port) : Promise.resolve(null)]);
 			this.gatewayLatencyMs = gwMs;
-			this.internetLatencyMs = netMs;
-			this.reach = netMs != null ? "online" : gwMs != null ? "lan-only" : "offline";
+			this.internetLatencyMs = allowInternet ? netMs : null;
+			this.reach = allowInternet ? netMs != null ? "online" : gwMs != null ? "lan-only" : "offline" : null;
 		});
 	}
 	refreshWifi() {
@@ -2240,7 +2247,9 @@ var NetworkCollector = class {
 	}
 	refreshPublicIp() {
 		return this.guarded("ip", async () => {
+			if (this.policy.localOnly || !this.policy.publicIp) return;
 			const r = await lookupPublicIps();
+			if (this.policy.localOnly || !this.policy.publicIp) return;
 			this.publicIp = {
 				...r,
 				updatedAt: Date.now()
@@ -2890,6 +2899,11 @@ var INTERVAL_MS = 2e3;
 var QualityCollector = class {
 	timer = null;
 	busy = false;
+	policy = { localOnly: false, internetProbe: true };
+	setPolicy(policy) {
+		this.policy = policy;
+		if (policy.localOnly || !policy.internetProbe) for (const p of this.probes.slice(1)) p.history = [];
+	}
 	probes;
 	constructor(gateway) {
 		this.probes = [
@@ -2929,6 +2943,7 @@ var QualityCollector = class {
 		this.busy = true;
 		try {
 			await Promise.all(this.probes.map(async (p) => {
+				if (p.id !== "gateway" && (this.policy.localOnly || !this.policy.internetProbe)) return;
 				const host = p.host();
 				if (!host) return;
 				const ms = await p.run(host);
@@ -3069,6 +3084,8 @@ var MetricsScheduler = class {
 		this.listeners.push(cb);
 	}
 	applySettings(s) {
+		this.network.setPolicy(s.networkPrivacy);
+		this.quality.setPolicy(s.networkPrivacy);
 		this.otherWatts = s.otherWatts;
 		this.coolingCfg = s.cooling;
 		this.framesCfg = s.frames;
@@ -3090,6 +3107,8 @@ var MetricsScheduler = class {
 		return this.proxy.clash.lookupRoute(hosts);
 	}
 	async start(s) {
+		this.network.setPolicy(s.networkPrivacy);
+		this.quality.setPolicy(s.networkPrivacy);
 		this.otherWatts = s.otherWatts;
 		this.coolingCfg = s.cooling;
 		this.framesCfg = s.frames;
@@ -4943,6 +4962,7 @@ function parseSpeedOptions(v) {
 }
 function registerIpc({ store, scheduler, alerts, history }) {
 	const tester = new SpeedTester((hosts) => scheduler.lookupRoute(hosts));
+	store.onChange((next) => { if (next.networkPrivacy.localOnly) tester.cancel(); });
 	electron.ipcMain.handle("theme:get", () => ({mode: electron.nativeTheme.themeSource, resolved: electron.nativeTheme.shouldUseDarkColors ? "dark" : "light"}));
 	electron.ipcMain.on(IPC.themeSet, (_e, mode) => {
 		appearance.setTheme(mode);
@@ -4956,6 +4976,7 @@ function registerIpc({ store, scheduler, alerts, history }) {
 		version: electron.app.getVersion()
 	}));
 	electron.ipcMain.handle(IPC.speedtestStart, async (e, raw) => {
+		if (store.get().networkPrivacy.localOnly) throw new Error("仅本地模式下不可进行外网测速");
 		const opts = parseSpeedOptions(raw);
 		if (tester.running) throw new Error("测速正在进行");
 		return tester.run(opts, (p) => {
@@ -5014,6 +5035,7 @@ var DEFAULT_SETTINGS = {
 	otherWatts: 60,
 	closeToTray: true,
 	autoStart: false,
+	networkPrivacy: { localOnly: false, publicIp: true, internetProbe: true },
 	taskbar: {
 		enabled: true,
 		offsetX: 0,
@@ -5153,6 +5175,11 @@ function sanitize(raw, base) {
 		otherWatts: num(r.otherWatts, 0, 500, base.otherWatts),
 		closeToTray: bool(r.closeToTray, base.closeToTray),
 		autoStart: bool(r.autoStart, base.autoStart),
+		networkPrivacy: {
+			localOnly: bool(r.networkPrivacy?.localOnly, base.networkPrivacy.localOnly),
+			publicIp: bool(r.networkPrivacy?.publicIp, base.networkPrivacy.publicIp),
+			internetProbe: bool(r.networkPrivacy?.internetProbe, base.networkPrivacy.internetProbe)
+		},
 		taskbar: {
 			enabled: bool(t.enabled, bt.enabled),
 			offsetX: num(t.offsetX, -600, 600, bt.offsetX),
@@ -5260,6 +5287,7 @@ var SettingsStore = class {
 				...prev.history,
 				...p.history
 			},
+			networkPrivacy: { ...prev.networkPrivacy, ...p.networkPrivacy },
 			cooling: {
 				roles: {
 					...prev.cooling.roles,
@@ -5608,11 +5636,12 @@ else {
 	};
 	electron.app.on("second-instance", () => openMain());
 	electron.app.whenReady().then(async () => {
-        await telegramAlerts.init();
+		store.load();
+		telegramAlerts.setOffline(store.get().networkPrivacy.localOnly);
+		await telegramAlerts.init();
         processMonitor.init();
 		electron.app.setAppUserModelId("com.sysmonitor.desktop");
 		appearance.restore();
-		store.load();
 		const taskbar = new TaskbarWindow(store.get());
 		const history = new HistoryStore(electron.app.getPath("userData"), store.get().history);
 		history.open();
@@ -5685,6 +5714,7 @@ else {
 			history
 		});
 		store.onChange((next, prev) => {
+			telegramAlerts.setOffline(next.networkPrivacy.localOnly);
 			scheduler.applySettings(next);
 			history.applySettings(next.history);
 			taskbar.apply(next);

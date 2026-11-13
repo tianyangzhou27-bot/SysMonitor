@@ -5,6 +5,7 @@ var DEFAULT_SETTINGS = {
 	otherWatts: 60,
 	closeToTray: true,
 	autoStart: false,
+	networkPrivacy: { localOnly: false, publicIp: true, internetProbe: true },
 	taskbar: {
 		enabled: true,
 		offsetX: 0,
@@ -144,6 +145,11 @@ function sanitize(raw, base) {
 		otherWatts: num(r.otherWatts, 0, 500, base.otherWatts),
 		closeToTray: bool(r.closeToTray, base.closeToTray),
 		autoStart: bool(r.autoStart, base.autoStart),
+		networkPrivacy: {
+			localOnly: bool(r.networkPrivacy?.localOnly, base.networkPrivacy.localOnly),
+			publicIp: bool(r.networkPrivacy?.publicIp, base.networkPrivacy.publicIp),
+			internetProbe: bool(r.networkPrivacy?.internetProbe, base.networkPrivacy.internetProbe)
+		},
 		taskbar: {
 			enabled: bool(t.enabled, bt.enabled),
 			offsetX: num(t.offsetX, -600, 600, bt.offsetX),
@@ -251,6 +257,7 @@ var SettingsStore = class {
 				...prev.history,
 				...p.history
 			},
+			networkPrivacy: { ...prev.networkPrivacy, ...p.networkPrivacy },
 			cooling: {
 				roles: {
 					...prev.cooling.roles,

@@ -6,6 +6,11 @@ const crypto = require('crypto');
 const { EnergyMeter, report } = require('./telegram-report');
 const { topText, alertLeaders } = require('./process-metrics');
 let config = { enabled: false, commandsEnabled: true, chatId: '', proxy: '', secret: '' };
+let offline = false;
+function setOffline(value) {
+  offline = value === true;
+  if (offline) { generation++; queue = []; void network?.closeAllConnections(); }
+}
 let win, file, network, last = '尚未发送', queue = [], running = false, generation = 0;
 let latest = null, meter, routeLookup = null, pollTimer, pollTask = null, pollOffset = 0, commandStateFile, recentChats = new Map(), stopped = false, lastCommandAt = 0;
 let commandStatus = '等待绑定私聊', nextPollAt = 0;
@@ -48,6 +53,7 @@ async function save(input) {
   last = '设置已保存'; return publicConfig();
 }
 async function api(method, body) {
+  if (offline) throw new Error('仅本地模式已启用，Telegram 网络请求被阻止。');
   let response, data;
   try {
     response = await network.fetch('https://api.telegram.org/bot' + token() + '/' + method, {
@@ -83,7 +89,7 @@ async function drain() {
   finally { running = false; }
 }
 function notify(title, body) {
-  if (!config.enabled) return;
+  if (!config.enabled || offline) return;
   if (queue.length >= 30) { last = '待发送报警过多，已丢弃最旧的一条'; queue.shift(); }
   queue.push({ gen: generation, text: '【SysMonitor 报警】\n电脑：' + os.hostname() + '\n时间：' + new Date().toLocaleString() + '\n' + title + '\n' + body + (/^恢复正常/.test(title) ? '' : alertLeaders(latest,title)) });
   void drain();
@@ -263,7 +269,7 @@ async function processUpdates(updates, now = Date.now()) {
   persistOffset();
 }
 async function poll() {
-  if (stopped || pollTask || Date.now() < nextPollAt || !config.commandsEnabled || !config.chatId || !config.secret) return;
+  if (offline || stopped || pollTask || Date.now() < nextPollAt || !config.commandsEnabled || !config.chatId || !config.secret) return;
   pollTask = (async () => {
     try {
       const updates = await api('getUpdates', { offset: pollOffset, timeout: 0, limit: 100, allowed_updates: ['message', 'callback_query'] });
@@ -323,4 +329,4 @@ async function init() {
   healthTimer = setInterval(writeHealth, 5000);
   app.on('will-quit', stop);
 }
-module.exports = { bindAlertSettings, init, show, notify, sample, bindRoute, stop };
+module.exports = { bindAlertSettings, init, show, notify, sample, bindRoute, stop, setOffline };

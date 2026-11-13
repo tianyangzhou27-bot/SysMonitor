@@ -4,6 +4,11 @@ var INTERVAL_MS = 2e3;
 var QualityCollector = class {
 	timer = null;
 	busy = false;
+	policy = { localOnly: false, internetProbe: true };
+	setPolicy(policy) {
+		this.policy = policy;
+		if (policy.localOnly || !policy.internetProbe) for (const p of this.probes.slice(1)) p.history = [];
+	}
 	probes;
 	constructor(gateway) {
 		this.probes = [
@@ -43,6 +48,7 @@ var QualityCollector = class {
 		this.busy = true;
 		try {
 			await Promise.all(this.probes.map(async (p) => {
+				if (p.id !== "gateway" && (this.policy.localOnly || !this.policy.internetProbe)) return;
 				const host = p.host();
 				if (!host) return;
 				const ms = await p.run(host);

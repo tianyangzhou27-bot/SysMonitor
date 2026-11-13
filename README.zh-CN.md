@@ -4,9 +4,9 @@
 
 **逆向还原源码已提供：**[可编辑 JavaScript 与 C# 工程](src/README.md)。C# 助手已重新编译成功；JavaScript 构建可逐字节生成全部 21 个运行文件。构建命令与验证边界见源码说明。
 
-**[下载 Windows 程序](https://github.com/tianyangzhou27-bot/SysMonitor/releases) · [使用说明](docs/USER_GUIDE.zh-CN.md) · [更新专区](updates/README.md) · [隐私说明](docs/PERMISSIONS_AND_PRIVACY.zh-CN.md)**
+**[下载 Windows 程序](https://github.com/tianyangzhou27-bot/SysMonitor/releases) · [使用说明](docs/USER_GUIDE.zh-CN.md) · [常见问题](docs/FAQ.zh-CN.md) · [更新专区](updates/README.md) · [隐私说明](docs/PERMISSIONS_AND_PRIVACY.zh-CN.md)**
 
-当前快照：`v0.1.0-20261113.1`（2026-11-13），包含进程管理、温度显示、Telegram 报警与恢复通知、远程状态查询和告警设置。设置和历史记录保存在本机。**可选 Telegram 功能会将相关监控信息发送到 Telegram；公网 IP 与连通性检测也会联网。** 本程序不是严格离线软件。
+当前快照：`v0.1.0-20261113.2`（2026-11-13），包含进程管理、温度显示、Telegram 报警与恢复通知、远程状态查询、告警设置及“隐私与联网”开关。设置和历史记录保存在本机；可选 Telegram 与自动联网功能可通过“仅本地模式”暂停。
 
 SysMonitor 是 Windows 桌面系统监控程序，提供任务栏悬浮显示、托盘操作、性能历史、提醒和可选的风扇控制。本仓库包含从用户提供的 Electron 安装目录中提取的 **0.1.0 版可运行构建代码**。提供的文件中没有原始 TypeScript/React 工程、构建配置或未打包的前端源码。`out/` 内是生成后的 JavaScript 和 CSS，可作为恢复源码的起点，但不是原始开发工程。
 

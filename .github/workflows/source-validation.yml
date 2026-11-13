@@ -33,6 +33,8 @@ jobs:
           node scripts/build-js.cjs
           node scripts/check.cjs
           if ($LASTEXITCODE) { throw 'JavaScript syntax check failed' }
+          node scripts/test-network-privacy.cjs
+          if ($LASTEXITCODE) { throw 'Privacy behavior check failed' }
       - name: Restore dependencies and compile recovered CSharp
         shell: pwsh
         run: |

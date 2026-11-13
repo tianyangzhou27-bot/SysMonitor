@@ -4,6 +4,8 @@
 
 Applies to the November 13, 2026 snapshot (internal application version remains 0.1.0). The application UI is currently Chinese.
 
+Privacy and network controls are available starting with `v0.1.0-20261113.2`. See the [FAQ](FAQ.md) for troubleshooting.
+
 ## Download and launch
 
 1. Open [GitHub Releases](https://github.com/tianyangzhou27-bot/SysMonitor/releases) and download `SysMonitor-*-windows-x64.zip`. GitHub's automatic Source code archives are not runnable Windows distributions.
@@ -16,6 +18,8 @@ Requires Windows 10/11 x64. The process collector uses Windows .NET Framework 4.
 ## Monitoring and history
 
 The main window shows CPU, GPU, RAM, disks, network, temperatures, and power. A taskbar overlay provides compact metrics. Settings control sampling, overlay behavior, alert thresholds, duration, cooldown, and history. History is enabled by default; disabling it does not erase existing records. Clear history in Settings or export CSV from the history page.
+
+Settings → Privacy and network can disable public-IP lookups or Internet probes separately. Local-only mode also blocks speed tests and Telegram requests.
 
 Missing readings mean unavailable, not zero. Whole-machine power may be estimated. Energy totals cover valid samples only, excluding sleep, shutdown, and sampling gaps. A manually started speed test can transfer substantial data; Cloudflare mode also uploads test traffic.
 

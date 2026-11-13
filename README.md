@@ -4,9 +4,9 @@
 
 **Recovered source is now available:** [Editable JavaScript and decompiled C# project](src/README.md). The C# helper compiles successfully; the JavaScript build reproduces all 21 runtime files byte-for-byte. See the source guide for commands and validation limits.
 
-**[Download Windows app](https://github.com/tianyangzhou27-bot/SysMonitor/releases) · [User guide](docs/USER_GUIDE.md) · [Updates](updates/README.md) · [Privacy](docs/PERMISSIONS_AND_PRIVACY.md)**
+**[Download Windows app](https://github.com/tianyangzhou27-bot/SysMonitor/releases) · [User guide](docs/USER_GUIDE.md) · [FAQ](docs/FAQ.md) · [Updates](updates/README.md) · [Privacy](docs/PERMISSIONS_AND_PRIVACY.md)**
 
-Current snapshot: `v0.1.0-20261113.1` (2026-11-13). Includes process management, temperature views, Telegram alerts, recovery notifications, remote status queries, and alert settings. Settings and history are stored locally. **Optional Telegram features send selected monitoring information to Telegram; public-IP/connectivity checks also access the network.** This is not a strictly offline application.
+Current snapshot: `v0.1.0-20261113.2` (2026-11-13). Includes process management, temperature views, Telegram alerts, recovery notifications, remote status queries, alert settings, and Privacy and network controls. Settings and history are stored locally. Optional Telegram and automatic network features can be paused with local-only mode.
 
 SysMonitor is a Windows desktop system monitor with a compact taskbar overlay, tray controls, performance history, alerts, and optional fan control. This repository contains an **extracted runnable build** of version 0.1.0 from the supplied Electron application. The original TypeScript/React project, build configuration, and unbundled frontend sources were not present in the supplied package. The files in `out/` are generated JavaScript and CSS, so this is a starting point for source restoration rather than the original development tree.
 

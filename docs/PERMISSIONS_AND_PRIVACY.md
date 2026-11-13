@@ -1,5 +1,9 @@
 # Permissions, data and privacy
 
+## Source update v0.1.0-20261113.2
+
+Settings → Privacy and network now lets users disable public-IP lookups or external connectivity probes independently. Local-only mode blocks both, manual speed tests and Telegram API requests. Local gateway checks and the optional `127.0.0.1` sensor server remain available. Existing in-flight requests may finish during a switch. User data is still stored locally; disabling local-only mode restores behavior according to the saved switches and Telegram configuration.
+
 ## Current snapshot: 2026-11-13 (takes precedence over the older audit below)
 
 **Settings, monitoring history, and accumulated energy are stored locally. The application has no feature automatically synchronizing those files to a developer-operated server. Optional Telegram features transmit monitoring information, so it cannot promise that data never leaves the PC.** Public-IP and connectivity checks also run automatically. Older statements below about no account/upload service do not cover the newly added Telegram integration.

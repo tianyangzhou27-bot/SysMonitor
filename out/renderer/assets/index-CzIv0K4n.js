@@ -25189,6 +25189,16 @@ function SettingsSheet({ open, onClose, settings: s, update }) {
 				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
 					className: "sgroup",
 					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", { children: "隐私与联网" }),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Row$2, { label: "仅本地模式", hint: "停止公网 IP、外网探测、测速和 Telegram；本机传感器与局域网指标继续工作", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Toggle, { checked: s.networkPrivacy.localOnly, onChange: (v) => update({ networkPrivacy: { localOnly: v } }) }) }),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Row$2, { label: "自动查询公网 IP", hint: "启用后会定期访问外部 IP 服务", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Toggle, { checked: s.networkPrivacy.publicIp, disabled: s.networkPrivacy.localOnly, onChange: (v) => update({ networkPrivacy: { publicIp: v } }) }) }),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Row$2, { label: "外网连通性检测", hint: "启用后会定期连接外部探测地址；仅本地模式仍可检测本机网关", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Toggle, { checked: s.networkPrivacy.internetProbe, disabled: s.networkPrivacy.localOnly, onChange: (v) => update({ networkPrivacy: { internetProbe: v } }) }) }),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "Telegram 在托盘菜单中单独配置；仅本地模式会强制暂停所有 Telegram 请求。设置和历史保存在本机。" })
+					]
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+					className: "sgroup",
+					children: [
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", { children: "任务栏显示" }),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Row$2, {
 							label: "在任务栏右侧显示",

@@ -35,11 +35,12 @@ else {
 	};
 	electron.app.on("second-instance", () => openMain());
 	electron.app.whenReady().then(async () => {
-        await telegramAlerts.init();
+		store.load();
+		telegramAlerts.setOffline(store.get().networkPrivacy.localOnly);
+		await telegramAlerts.init();
         processMonitor.init();
 		electron.app.setAppUserModelId("com.sysmonitor.desktop");
 		appearance.restore();
-		store.load();
 		const taskbar = new TaskbarWindow(store.get());
 		const history = new HistoryStore(electron.app.getPath("userData"), store.get().history);
 		history.open();
@@ -112,6 +113,7 @@ else {
 			history
 		});
 		store.onChange((next, prev) => {
+			telegramAlerts.setOffline(next.networkPrivacy.localOnly);
 			scheduler.applySettings(next);
 			history.applySettings(next.history);
 			taskbar.apply(next);

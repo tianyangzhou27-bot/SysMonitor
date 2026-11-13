@@ -47,6 +47,12 @@ var NetworkCollector = class {
 		updatedAt: null
 	};
 	timers = [];
+	policy = { localOnly: false, publicIp: true, internetProbe: true };
+	setPolicy(policy) {
+		this.policy = policy;
+		if (policy.localOnly || !policy.publicIp) this.publicIp = { domestic: null, overseas: null, overseasLoc: null, updatedAt: null };
+		if (policy.localOnly || !policy.internetProbe) { this.internetLatencyMs = null; this.reach = null; }
+	}
 	stopped = true;
 	busy = {
 		info: false,
@@ -118,10 +124,11 @@ var NetworkCollector = class {
 	probe() {
 		return this.guarded("probe", async () => {
 			const gw = this.primaryGateway;
-			const [gwMs, netMs] = await Promise.all([gw ? pingLatency(gw) : Promise.resolve(null), tcpLatency(INTERNET_PROBE.host, INTERNET_PROBE.port)]);
+			const allowInternet = !this.policy.localOnly && this.policy.internetProbe;
+			const [gwMs, netMs] = await Promise.all([gw ? pingLatency(gw) : Promise.resolve(null), allowInternet ? tcpLatency(INTERNET_PROBE.host, INTERNET_PROBE.port) : Promise.resolve(null)]);
 			this.gatewayLatencyMs = gwMs;
-			this.internetLatencyMs = netMs;
-			this.reach = netMs != null ? "online" : gwMs != null ? "lan-only" : "offline";
+			this.internetLatencyMs = allowInternet ? netMs : null;
+			this.reach = allowInternet ? netMs != null ? "online" : gwMs != null ? "lan-only" : "offline" : null;
 		});
 	}
 	refreshWifi() {
@@ -146,7 +153,9 @@ var NetworkCollector = class {
 	}
 	refreshPublicIp() {
 		return this.guarded("ip", async () => {
+			if (this.policy.localOnly || !this.policy.publicIp) return;
 			const r = await lookupPublicIps();
+			if (this.policy.localOnly || !this.policy.publicIp) return;
 			this.publicIp = {
 				...r,
 				updatedAt: Date.now()

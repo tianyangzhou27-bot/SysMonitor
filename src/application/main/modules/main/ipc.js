@@ -21,6 +21,7 @@ function parseSpeedOptions(v) {
 }
 function registerIpc({ store, scheduler, alerts, history }) {
 	const tester = new SpeedTester((hosts) => scheduler.lookupRoute(hosts));
+	store.onChange((next) => { if (next.networkPrivacy.localOnly) tester.cancel(); });
 	electron.ipcMain.handle("theme:get", () => ({mode: electron.nativeTheme.themeSource, resolved: electron.nativeTheme.shouldUseDarkColors ? "dark" : "light"}));
 	electron.ipcMain.on(IPC.themeSet, (_e, mode) => {
 		appearance.setTheme(mode);
@@ -34,6 +35,7 @@ function registerIpc({ store, scheduler, alerts, history }) {
 		version: electron.app.getVersion()
 	}));
 	electron.ipcMain.handle(IPC.speedtestStart, async (e, raw) => {
+		if (store.get().networkPrivacy.localOnly) throw new Error("仅本地模式下不可进行外网测速");
 		const opts = parseSpeedOptions(raw);
 		if (tester.running) throw new Error("测速正在进行");
 		return tester.run(opts, (p) => {

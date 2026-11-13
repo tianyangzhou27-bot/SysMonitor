@@ -96,6 +96,8 @@ var MetricsScheduler = class {
 		this.listeners.push(cb);
 	}
 	applySettings(s) {
+		this.network.setPolicy(s.networkPrivacy);
+		this.quality.setPolicy(s.networkPrivacy);
 		this.otherWatts = s.otherWatts;
 		this.coolingCfg = s.cooling;
 		this.framesCfg = s.frames;
@@ -117,6 +119,8 @@ var MetricsScheduler = class {
 		return this.proxy.clash.lookupRoute(hosts);
 	}
 	async start(s) {
+		this.network.setPolicy(s.networkPrivacy);
+		this.quality.setPolicy(s.networkPrivacy);
 		this.otherWatts = s.otherWatts;
 		this.coolingCfg = s.cooling;
 		this.framesCfg = s.frames;
