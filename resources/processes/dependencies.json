@@ -1,0 +1,210 @@
+{
+  "packages": [
+    {
+      "id": "Microsoft.Bcl.AsyncInterfaces",
+      "version": "9.0.8"
+    },
+    {
+      "id": "Microsoft.Diagnostics.NETCore.Client",
+      "version": "0.2.510501"
+    },
+    {
+      "id": "Microsoft.Extensions.DependencyInjection",
+      "version": "6.0.0"
+    },
+    {
+      "id": "Microsoft.Extensions.DependencyInjection.Abstractions",
+      "version": "6.0.0"
+    },
+    {
+      "id": "Microsoft.Extensions.Logging",
+      "version": "6.0.0"
+    },
+    {
+      "id": "Microsoft.Extensions.Logging.Abstractions",
+      "version": "6.0.0"
+    },
+    {
+      "id": "Microsoft.Extensions.Options",
+      "version": "6.0.0"
+    },
+    {
+      "id": "Microsoft.Extensions.Primitives",
+      "version": "6.0.0"
+    },
+    {
+      "id": "Microsoft.Win32.Registry",
+      "version": "5.0.0"
+    },
+    {
+      "id": "System.Buffers",
+      "version": "4.5.1"
+    },
+    {
+      "id": "System.Collections.Immutable",
+      "version": "9.0.8"
+    },
+    {
+      "id": "System.Diagnostics.DiagnosticSource",
+      "version": "6.0.0"
+    },
+    {
+      "id": "System.IO.Pipelines",
+      "version": "9.0.8"
+    },
+    {
+      "id": "System.Memory",
+      "version": "4.5.5"
+    },
+    {
+      "id": "System.Reflection.Metadata",
+      "version": "9.0.8"
+    },
+    {
+      "id": "System.Reflection.TypeExtensions",
+      "version": "4.7.0"
+    },
+    {
+      "id": "System.Runtime.CompilerServices.Unsafe",
+      "version": "6.1.2"
+    },
+    {
+      "id": "System.Security.AccessControl",
+      "version": "5.0.0"
+    },
+    {
+      "id": "System.Security.Principal.Windows",
+      "version": "5.0.0"
+    },
+    {
+      "id": "System.Text.Encodings.Web",
+      "version": "9.0.8"
+    },
+    {
+      "id": "System.Text.Json",
+      "version": "9.0.8"
+    },
+    {
+      "id": "System.Threading.Tasks.Extensions",
+      "version": "4.5.4"
+    },
+    {
+      "id": "Microsoft.Diagnostics.Tracing.TraceEvent",
+      "version": "3.2.8"
+    }
+  ],
+  "files": [
+    {
+      "path": "amd64/KernelTraceControl.dll",
+      "sha256": "98de2f1de4fb1711688c04e2cb0187bf8c47e627771e8f51329671f296bfc688"
+    },
+    {
+      "path": "amd64/msdia140.dll",
+      "sha256": "7341081feac7a2cebcc796c9c2bc5041a295df0673244f2595294e06a0bd7ee8"
+    },
+    {
+      "path": "Dia2Lib.dll",
+      "sha256": "6c4cac68010fe032218efe5e9fcf46eef9f77bfaa5f3bd33f03c5ff77d5a8fac"
+    },
+    {
+      "path": "Microsoft.Bcl.AsyncInterfaces.dll",
+      "sha256": "881d98c0d56edcba53c18eb5df0a334333cb647f47ba42049784258778f34596"
+    },
+    {
+      "path": "Microsoft.Diagnostics.FastSerialization.dll",
+      "sha256": "f01f02feaf1979d5d8a8c1a2a0f98818d33120a5234f7ae6bda1744585e05c71"
+    },
+    {
+      "path": "Microsoft.Diagnostics.NETCore.Client.dll",
+      "sha256": "850a14d0925fae5fccb9755f1aa5fe43fdf2cd2ffd0231c0b33b994ee9261f33"
+    },
+    {
+      "path": "Microsoft.Diagnostics.Tracing.TraceEvent.dll",
+      "sha256": "bc4ef3839aea46cebc54a557ecc115474c6eecadfbc68c76da087e8dd616ba7e"
+    },
+    {
+      "path": "Microsoft.Extensions.DependencyInjection.Abstractions.dll",
+      "sha256": "95a7c66abd60ba45a2020ac3d42702fd9823f7b6db2ceec6a37c9e9b0602fed1"
+    },
+    {
+      "path": "Microsoft.Extensions.DependencyInjection.dll",
+      "sha256": "d6de20035b25367a82da6180c45511d9077374c5f96f6cc5fedd2107d61efb9c"
+    },
+    {
+      "path": "Microsoft.Extensions.Logging.Abstractions.dll",
+      "sha256": "050405babe5276f1b2e405809c46847da2b4a7cb005a976c58949ed68d9ff37a"
+    },
+    {
+      "path": "Microsoft.Extensions.Logging.dll",
+      "sha256": "4d1ca57435ba7d3193a1657cbda1c66ad39cf4f449a069332544f73ee2e779e4"
+    },
+    {
+      "path": "Microsoft.Extensions.Options.dll",
+      "sha256": "ac83168b7316e7b9f8e0806d3cce8030d2f41ad08caa085bfd4e877f5ae65827"
+    },
+    {
+      "path": "Microsoft.Extensions.Primitives.dll",
+      "sha256": "60df37bef5b47e822c02cf8547de3b2a836973e517efbaf090f14086d5155c9b"
+    },
+    {
+      "path": "Microsoft.Win32.Registry.dll",
+      "sha256": "e9a9d281c1a708aaae366f82fd6a1742f65da2918cc4fa5eaaaada0be24277d9"
+    },
+    {
+      "path": "System.Buffers.dll",
+      "sha256": "accccfbe45d9f08ffeed9916e37b33e98c65be012cfff6e7fa7b67210ce1fefb"
+    },
+    {
+      "path": "System.Collections.Immutable.dll",
+      "sha256": "83c48bdccb0b80497c252be8ce2d1177aa644e499005cac13ec39e1a55b7f3ff"
+    },
+    {
+      "path": "System.Diagnostics.DiagnosticSource.dll",
+      "sha256": "81e664880042e451495a1be22624ab4ab5e8a06803eeda5bdda7c69df2439815"
+    },
+    {
+      "path": "System.IO.Pipelines.dll",
+      "sha256": "eea5dee4914b04801e1541f2ad5a14b4317a30d07760e55d5d37aec03097c47e"
+    },
+    {
+      "path": "System.Memory.dll",
+      "sha256": "bf3fb84664f4097f1a8a9bc71a51dcf8cf1a905d4080a4d290da1730866e856f"
+    },
+    {
+      "path": "System.Reflection.Metadata.dll",
+      "sha256": "8055d24d3b17010f18d59bea962884922dea516632a5d8a02c57ea7534f2a214"
+    },
+    {
+      "path": "System.Reflection.TypeExtensions.dll",
+      "sha256": "4682c5211d69e0c40c39f044929aceaf1ce6b4cbac8f938a05f493e35de83dbf"
+    },
+    {
+      "path": "System.Runtime.CompilerServices.Unsafe.dll",
+      "sha256": "08cbd7278b66f1e68425a82d4b97181a4130d93e3dd91831407aba7212ccdacf"
+    },
+    {
+      "path": "System.Security.AccessControl.dll",
+      "sha256": "1fda491eebdb19ea0a83cf6c16ab5dd004a1bfdfc845ede017ebe0945beb927f"
+    },
+    {
+      "path": "System.Security.Principal.Windows.dll",
+      "sha256": "b4d8e15adc235d0e858e39b5133e5d00a4baa8c94f4f39e3b5e791b0f9c0c806"
+    },
+    {
+      "path": "System.Text.Encodings.Web.dll",
+      "sha256": "e779d7127d1f270edaf85d9d5516bd51b1d71618c4df5a23c65befcaffcd44a1"
+    },
+    {
+      "path": "System.Text.Json.dll",
+      "sha256": "53463df8e4d8f3d7b20d58d6ec75e2591df64b9c4bcf0f85c07403154f6d32c3"
+    },
+    {
+      "path": "System.Threading.Tasks.Extensions.dll",
+      "sha256": "4f81ffd0dc7204db75afc35ea4291769b07c440592f28894260eea76626a23c6"
+    },
+    {
+      "path": "TraceReloggerLib.dll",
+      "sha256": "6830c0f1d3f3c17719181e73dd5cfa8ccbb3f3c575329d2120576545103467b5"
+    }
+  ]
+}

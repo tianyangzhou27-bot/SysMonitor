@@ -1,0 +1,64 @@
+name: Windows release
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/windows-release.yml
+      - scripts/package-windows.ps1
+      - scripts/restore-process-dependencies.ps1
+      - resources/processes/dependencies.json
+permissions:
+  contents: write
+concurrency:
+  group: windows-release
+  cancel-in-progress: false
+jobs:
+  package:
+    runs-on: windows-latest
+    timeout-minutes: 25
+    env:
+      RELEASE_TAG: v0.1.0-20261113.1
+    steps:
+      - name: Check out exact workflow commit
+        shell: pwsh
+        run: |
+          git init .
+          git remote add origin "https://github.com/$env:GITHUB_REPOSITORY.git"
+          git fetch --depth 1 origin $env:GITHUB_SHA
+          git checkout --detach FETCH_HEAD
+          if ($LASTEXITCODE) { throw 'Checkout failed' }
+      - name: Install pinned runtime and check JavaScript
+        shell: pwsh
+        run: |
+          node --version
+          npm install --no-audit --no-fund
+          if ($LASTEXITCODE) { throw 'Dependency installation failed' }
+          npm run check
+          if ($LASTEXITCODE) { throw 'Syntax check failed' }
+      - name: Restore exact helper dependencies and package
+        shell: pwsh
+        run: ./scripts/package-windows.ps1 -Tag $env:RELEASE_TAG
+      - name: Attach verified Windows package to release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $headers = @{ Authorization = "Bearer $env:GH_TOKEN"; Accept = 'application/vnd.github+json'; 'X-GitHub-Api-Version' = '2022-11-28' }
+          $api = "https://api.github.com/repos/$env:GITHUB_REPOSITORY"
+          $release = Invoke-RestMethod -Uri "$api/releases/tags/$env:RELEASE_TAG" -Headers $headers
+          foreach ($name in @("SysMonitor-$env:RELEASE_TAG-windows-x64.zip", 'SHA256SUMS.txt')) {
+            if ($release.assets.name -contains $name) { throw "Asset already exists: $name. Refusing to overwrite." }
+          }
+          foreach ($name in @("SysMonitor-$env:RELEASE_TAG-windows-x64.zip", 'SHA256SUMS.txt')) {
+            $file = Join-Path 'dist' $name
+            $url = ($release.upload_url -replace '\{.*$', '') + '?name=' + [uri]::EscapeDataString($name)
+            $type = if ($name.EndsWith('.zip')) { 'application/zip' } else { 'text/plain' }
+            $asset = Invoke-RestMethod -Uri $url -Method Post -Headers $headers -ContentType $type -InFile $file
+            if ($asset.state -ne 'uploaded' -or $asset.size -ne (Get-Item -LiteralPath $file).Length) { throw "Upload verification failed: $name" }
+          }
+          $note = "`n`n---`nWindows 下载包由 GitHub Actions 从公开的 JavaScript 构建文件、固定版本 Electron 和经过 SHA-256 核对的采集依赖组装。它不是原始 TypeScript/C# 工程的重新编译。`n`nThe Windows archive was assembled by GitHub Actions from published JavaScript build files, pinned Electron, and SHA-256-verified collector dependencies. It is not a recompilation of the missing original TypeScript/C# project."
+          $body = @{ body = $release.body + $note } | ConvertTo-Json
+          Invoke-RestMethod -Uri "$api/releases/$($release.id)" -Method Patch -Headers $headers -ContentType 'application/json' -Body ([Text.Encoding]::UTF8.GetBytes($body)) | Out-Null
+          Write-Output $release.html_url
