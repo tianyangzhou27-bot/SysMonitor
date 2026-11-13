@@ -1,0 +1,35 @@
+name: Repair privacy release tag
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/repair-release.yml]
+permissions:
+  contents: write
+jobs:
+  repair:
+    runs-on: windows-latest
+    timeout-minutes: 5
+    steps:
+      - name: Set exact tag for published assets
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $tag = 'v0.1.0-20261113.2'
+          $sha = 'bf8e71cea73942697b0688881df6446f02179183'
+          $headers = @{ Authorization = "Bearer $env:GH_TOKEN"; Accept = 'application/vnd.github+json'; 'X-GitHub-Api-Version' = '2022-11-28' }
+          $api = "https://api.github.com/repos/$env:GITHUB_REPOSITORY"
+          $release = Invoke-RestMethod -Uri "$api/releases/443971870" -Headers $headers
+          if ($release.name -ne "SysMonitor $tag" -or $release.assets.name -notcontains "SysMonitor-$tag-windows-x64.zip") { throw 'Release identity or assets changed; refusing to retag.' }
+          try { $existing = Invoke-RestMethod -Uri "$api/git/ref/tags/$tag" -Headers $headers }
+          catch {
+            if ($_.Exception.Response.StatusCode -ne 404) { throw }
+            $ref = @{ ref = "refs/tags/$tag"; sha = $sha } | ConvertTo-Json
+            $existing = Invoke-RestMethod -Uri "$api/git/refs" -Method Post -Headers $headers -ContentType 'application/json' -Body $ref
+          }
+          if ($existing.object.sha -ne $sha) { throw 'Existing tag points to another commit.' }
+          $patch = @{ tag_name = $tag; target_commitish = $sha; name = "SysMonitor $tag" } | ConvertTo-Json
+          $updated = Invoke-RestMethod -Uri "$api/releases/$($release.id)" -Method Patch -Headers $headers -ContentType 'application/json' -Body $patch
+          if ($updated.tag_name -ne $tag) { throw 'Release tag update did not take effect.' }
+          Write-Output $updated.html_url
