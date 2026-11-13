@@ -32,6 +32,7 @@ The current application interface is in **Chinese**. These English instructions 
 git clone https://github.com/tianyangzhou27-bot/SysMonitor.git
 cd SysMonitor
 npm install
+npx --no-install install-electron
 npm start
 ```
 

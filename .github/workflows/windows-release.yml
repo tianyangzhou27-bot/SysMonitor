@@ -34,6 +34,8 @@ jobs:
           node --version
           npm install --no-audit --no-fund
           if ($LASTEXITCODE) { throw 'Dependency installation failed' }
+          node node_modules/electron/install.js
+          if ($LASTEXITCODE) { throw 'Electron runtime download failed' }
           npm run check
           if ($LASTEXITCODE) { throw 'Syntax check failed' }
       - name: Restore exact helper dependencies and package

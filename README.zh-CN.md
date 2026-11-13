@@ -32,6 +32,7 @@ SysMonitor 是 Windows 桌面系统监控程序，提供任务栏悬浮显示、
 git clone https://github.com/tianyangzhou27-bot/SysMonitor.git
 cd SysMonitor
 npm install
+npx --no-install install-electron
 npm start
 ```
 
